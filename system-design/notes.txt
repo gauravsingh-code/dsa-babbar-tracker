@@ -1,0 +1,49 @@
+System Design Mastery - Personal Notes
+========================================
+
+HOW TO NEVER LOSE YOUR NOTES:
+-----------------------------
+
+✅ Your notes are automatically saved in your browser (localStorage)
+✅ Use "Download Notes" button to backup notes to a .txt file
+✅ Use "Import Notes" button to restore notes from a saved file
+✅ This works perfectly on GitHub Pages and any static website!
+
+How the Notes Feature Works:
+-----------------------------
+1. Click "My Notes" in the sidebar
+2. Type your note in the text area
+3. Click "Add Note" to save
+4. Notes appear with timestamps
+5. Click "Delete" on any note to remove it
+
+IMPORTANT - Backup Your Notes:
+-----------------------------
+• Click "Download Notes" regularly to backup your notes
+• Save the downloaded .txt file somewhere safe (Desktop, Cloud Drive, etc.)
+• If you clear browser data or switch browsers, use "Import Notes" to restore
+
+Import & Export:
+---------------
+• Download creates a formatted .txt file with all your notes
+• The file includes JSON data at the bottom for easy import
+• Import automatically merges with existing notes (no duplicates)
+• You can move notes between different computers/browsers
+
+Tips for Using Notes:
+--------------------
+• Use notes to capture key concepts as you study
+• Write down interview tips you want to remember
+• Keep track of questions to research further
+• Document your understanding of complex topics
+• Note down system design patterns you've learned
+• Download your notes weekly as a backup habit
+
+This solution works perfectly on GitHub Pages because:
+• No server required - everything runs in the browser
+• Download/import uses browser capabilities
+• Your data stays yours - stored locally or in your files
+
+Happy Learning! 🚀
+
+

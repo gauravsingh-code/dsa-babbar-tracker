@@ -268,38 +268,26 @@
             margin-bottom: 30px;
         }
 
-        .topic-header {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--accent-secondary);
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .topic-header::before {
-            content: '●';
-            font-size: 0.6rem;
-        }
-
         .topic-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 15px;
-            padding: 15px;
             background: var(--bg-tertiary);
             border-radius: 8px;
             border: 1px solid transparent;
             transition: all 0.3s ease;
-            cursor: pointer;
             margin-bottom: 12px;
+            overflow: hidden;
         }
 
         .topic-item:hover {
             border-color: var(--accent-primary);
             background: rgba(0, 212, 255, 0.05);
+        }
+
+        .topic-main {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 15px;
+            cursor: pointer;
         }
 
         .checkbox {
@@ -311,6 +299,7 @@
             margin-top: 2px;
             position: relative;
             transition: all 0.3s ease;
+            cursor: pointer;
         }
 
         .checkbox.checked {
@@ -329,6 +318,10 @@
             font-weight: 700;
         }
 
+        .topic-content {
+            flex: 1;
+        }
+
         .topic-name {
             font-weight: 600;
             color: var(--text-primary);
@@ -341,6 +334,143 @@
             color: var(--text-muted);
         }
 
+        .expand-icon {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-left: auto;
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .topic-item.expanded .expand-icon {
+            transform: rotate(180deg);
+        }
+
+        .topic-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            padding: 0 15px;
+            border-top: 1px solid transparent;
+        }
+
+        .topic-item.expanded .topic-details {
+            max-height: 500px;
+            padding: 15px;
+            padding-left: 50px;
+            border-top-color: var(--border);
+            margin-top: 15px;
+        }
+
+        .topic-description {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .topic-resources {
+            margin-top: 15px;
+        }
+
+        .resource-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--accent-tertiary);
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .resource-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .resource-link {
+            display: inline-block;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            padding: 6px 12px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--accent-primary);
+            border-radius: 6px;
+            color: var(--accent-primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .resource-link:hover {
+            background: var(--accent-primary);
+            color: var(--bg-primary);
+            transform: translateY(-2px);
+        }
+
+        .track-content {
+            display: block;
+        }
+
+        .progress-section {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .progress-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .progress-percentage {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-primary);
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            height: 12px;
+            background: var(--bg-tertiary);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+            border-radius: 6px;
+            transition: width 0.5s ease;
+            position: relative;
+        }
+
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Tables */
         table {
             width: 100%;
             border-collapse: separate;
@@ -474,64 +604,295 @@
             font-weight: 700;
         }
 
-        .progress-section {
+        /* Notes */
+        .notes-container {
             background: var(--bg-secondary);
             border: 1px solid var(--border);
             border-radius: 12px;
             padding: 30px;
-            margin-bottom: 40px;
+            margin-bottom: 20px;
         }
 
-        .progress-header {
+        .notes-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 20px;
         }
 
-        .progress-title {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 1.2rem;
-            font-weight: 600;
-        }
-
-        .progress-percentage {
+        .notes-title {
             font-family: 'JetBrains Mono', monospace;
             font-size: 1.5rem;
-            font-weight: 700;
+            font-weight: 600;
             color: var(--accent-primary);
         }
 
-        .progress-bar-container {
+        .note-input-area {
+            margin-bottom: 20px;
+        }
+
+        .note-textarea {
             width: 100%;
-            height: 12px;
+            min-height: 120px;
+            padding: 15px;
             background: var(--bg-tertiary);
-            border-radius: 6px;
-            overflow: hidden;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-family: 'Newsreader', serif;
+            font-size: 1rem;
+            line-height: 1.6;
+            resize: vertical;
+            transition: all 0.3s ease;
         }
 
-        .progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+        .note-textarea:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            background: var(--bg-secondary);
+        }
+
+        .note-textarea::placeholder {
+            color: var(--text-muted);
+        }
+
+        .note-btn {
+            font-family: 'JetBrains Mono', monospace;
+            padding: 10px 20px;
+            background: var(--accent-primary);
+            border: none;
             border-radius: 6px;
-            transition: width 0.5s ease;
+            color: var(--bg-primary);
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .note-btn:hover {
+            background: var(--accent-secondary);
+            transform: translateY(-2px);
+        }
+
+        .note-btn-secondary {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--accent-primary);
+            color: var(--accent-primary);
+        }
+
+        .note-btn-secondary:hover {
+            background: var(--accent-primary);
+            color: var(--bg-primary);
+        }
+
+        .note-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .file-input-wrapper {
             position: relative;
+            overflow: hidden;
+            display: inline-block;
         }
 
-        .progress-bar::after {
-            content: '';
+        .file-input-wrapper input[type="file"] {
             position: absolute;
+            left: -9999px;
+        }
+
+        .notes-info {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--accent-tertiary);
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 20px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .notes-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .note-item {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .note-item:hover {
+            border-color: var(--accent-primary);
+            box-shadow: 0 4px 20px rgba(0, 212, 255, 0.1);
+        }
+
+        .note-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .note-date {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .note-delete {
+            font-family: 'JetBrains Mono', monospace;
+            padding: 5px 12px;
+            background: transparent;
+            border: 1px solid var(--accent-secondary);
+            border-radius: 4px;
+            color: var(--accent-secondary);
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .note-delete:hover {
+            background: var(--accent-secondary);
+            color: var(--bg-primary);
+        }
+
+        .note-content {
+            color: var(--text-primary);
+            line-height: 1.8;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .no-notes {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 280px;
+            height: 100vh;
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--border);
+            padding: 30px 20px;
+            overflow-y: auto;
+            z-index: 100;
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar-header {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--accent-primary);
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .sidebar-nav {
+            list-style: none;
+        }
+
+        .sidebar-nav > li {
+            margin-bottom: 8px;
+        }
+
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 15px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .sidebar-link:hover {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            transform: translateX(5px);
+        }
+
+        .sidebar-link.active {
+            background: var(--bg-tertiary);
+            color: var(--accent-primary);
+            border-left: 3px solid var(--accent-primary);
+        }
+
+        .sidebar-icon {
+            font-size: 1.1rem;
+        }
+
+        .sidebar-toggle {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 101;
+            background: var(--accent-primary);
+            border: none;
+            border-radius: 8px;
+            padding: 12px 16px;
+            cursor: pointer;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.2rem;
+            color: var(--bg-primary);
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-toggle:hover {
+            background: var(--accent-secondary);
+            transform: scale(1.05);
+        }
+
+        .main-content {
+            margin-left: 280px;
+            transition: margin-left 0.3s ease;
+            min-height: 100vh;
+        }
+
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            animation: shimmer 2s infinite;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 99;
         }
 
-        @keyframes shimmer {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
+        /* Page Views - Only one visible at a time */
+        .page-view {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .page-view.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         footer {
@@ -553,946 +914,1402 @@
             color: var(--accent-secondary);
         }
 
-        .track-tabs {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 40px;
-            border-bottom: 2px solid var(--border);
-            flex-wrap: wrap;
-        }
-
-        .track-tab {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 1.1rem;
-            font-weight: 600;
-            padding: 15px 30px;
-            background: transparent;
-            border: none;
-            color: var(--text-muted);
-            cursor: pointer;
-            border-bottom: 3px solid transparent;
-            transition: all 0.3s ease;
-            margin-bottom: -2px;
-        }
-
-        .track-tab:hover {
-            color: var(--text-primary);
-        }
-
-        .track-tab.active {
-            color: var(--accent-primary);
-            border-bottom-color: var(--accent-primary);
-        }
-
-        .track-content {
-            display: none;
-        }
-
-        .track-content.active {
-            display: block;
-        }
-
-        .track-badge {
-            display: inline-block;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.7rem;
-            padding: 4px 10px;
-            background: var(--bg-tertiary);
-            border-radius: 12px;
-            margin-left: 10px;
-            vertical-align: middle;
-        }
-
-        .track-badge.hld {
-            color: var(--accent-primary);
-            border: 1px solid var(--accent-primary);
-        }
-
-        .track-badge.lld {
-            color: var(--accent-secondary);
-            border: 1px solid var(--accent-secondary);
-        }
-
         @media (max-width: 768px) {
-            .container { padding: 40px 20px; }
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .sidebar-toggle {
+                display: block;
+            }
+
+            .sidebar-overlay.active {
+                display: block;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .container { padding: 40px 20px; padding-top: 80px; }
             h1 { font-size: 2.5rem; }
             .section-number { font-size: 2rem; }
             .section-title { font-size: 1.5rem; }
             .stats-grid { grid-template-columns: 1fr; }
             .header-meta { flex-direction: column; gap: 15px; }
             table { display: block; overflow-x: auto; }
-            .track-tabs { flex-direction: column; gap: 10px; }
-            .track-tab { padding: 12px 20px; }
         }
     </style>
 </head>
 <body>
+    <!-- Sidebar Toggle Button -->
+    <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">📚 System Design</div>
+        <ul class="sidebar-nav">
+            <li><a class="sidebar-link active" onclick="showPage('home')">
+                <span class="sidebar-icon">🏠</span> Home
+            </a></li>
+            <li><a class="sidebar-link" onclick="showPage('hld')">
+                <span class="sidebar-icon">☁️</span> HLD Track
+            </a></li>
+            <li><a class="sidebar-link" onclick="showPage('lld')">
+                <span class="sidebar-icon">🧩</span> LLD Track
+            </a></li>
+            <li><a class="sidebar-link" onclick="showPage('notes')">
+                <span class="sidebar-icon">📝</span> My Notes
+            </a></li>
+            <li><a class="sidebar-link" onclick="showPage('tips')">
+                <span class="sidebar-icon">💡</span> Interview Tips
+            </a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
     <div class="container">
-        <header>
-            <h1>System Design Mastery</h1>
-            <p class="subtitle">A Structured 12-Week Journey from Fundamentals to Expertise</p>
-            <div class="header-meta">
-                <span>Duration: 12 Weeks</span>
-                <span>Daily: 1-2 Hours</span>
-                <span>Target: Senior Engineer</span>
-                <span>Focus: HLD + LLD</span>
-            </div>
-        </header>
+        
+        <!-- HOME PAGE -->
+        <div class="page-view active" id="page-home">
+            <header>
+                <h1>System Design Mastery</h1>
+                <p class="subtitle">A Structured 12-Week Journey from Fundamentals to Expertise</p>
+                <div class="header-meta">
+                    <span>Duration: 12 Weeks</span>
+                    <span>Daily: 1-2 Hours</span>
+                    <span>Target: Senior Engineer</span>
+                    <span>Focus: HLD + LLD</span>
+                </div>
+            </header>
 
-        <div class="progress-section">
-            <div class="progress-header">
-                <div class="progress-title">Overall Progress</div>
-                <div class="progress-percentage" id="overallProgress">0%</div>
+            <div class="progress-section">
+                <div class="progress-header">
+                    <div class="progress-title">Overall Progress</div>
+                    <div class="progress-percentage" id="overallProgress">0%</div>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+                </div>
             </div>
-            <div class="progress-bar-container">
-                <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-label">HLD Topics</div>
+                    <div class="stat-value" id="hldTotal">0/22</div>
+                    <div class="stat-subtitle">High-Level Design</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">LLD Topics</div>
+                    <div class="stat-value" id="lldTotal">0/14</div>
+                    <div class="stat-subtitle">Low-Level Design</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Overall Completed</div>
+                    <div class="stat-value" id="completedTopics">0/36</div>
+                    <div class="stat-subtitle">Keep Going!</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Practice Problems</div>
+                    <div class="stat-value">30+</div>
+                    <div class="stat-subtitle">Real-world Systems</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-number">01</div>
+                    <h2 class="section-title">Quick Start Guide</h2>
+                </div>
+                <div class="tip-card">
+                    <h3 class="tip-title">🎯 How to Use This Tracker</h3>
+                    <div class="tip-content">
+                        <ul>
+                            <li><strong>HLD Track:</strong> Learn distributed systems, scalability, and system architecture</li>
+                            <li><strong>LLD Track:</strong> Master object-oriented design, design patterns, and code structure</li>
+                            <li><strong>My Notes:</strong> Take personal notes and download/import them for backup</li>
+                            <li><strong>Interview Tips:</strong> Essential strategies for acing system design interviews</li>
+                            <li><strong>Progress Tracking:</strong> Check topics as complete and track your journey</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
+        <!-- END HOME PAGE -->
 
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-label">HLD Topics</div>
-                <div class="stat-value" id="hldTotal">0/45</div>
-                <div class="stat-subtitle">High-Level Design</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-label">LLD Topics</div>
-                <div class="stat-value" id="lldTotal">0/40</div>
-                <div class="stat-subtitle">Low-Level Design</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-label">Overall Completed</div>
-                <div class="stat-value" id="completedTopics">0/85</div>
-                <div class="stat-subtitle">Keep Going!</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-label">Practice Problems</div>
-                <div class="stat-value">30+</div>
-                <div class="stat-subtitle">Real-world Systems</div>
-            </div>
-        </div>
+        <!-- HLD TRACK PAGE -->
+        <div class="page-view" id="page-hld">
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-number">☁️</div>
+                    <h2 class="section-title">High-Level Design (HLD) Track</h2>
+                </div>
 
-        <!-- Learning Tracks -->
-        <section class="section">
-            <div class="section-header">
-                <div class="section-number">01</div>
-                <h2 class="section-title">Learning Tracks</h2>
-            </div>
+                <p style="color: var(--text-secondary); margin-bottom: 30px; line-height: 1.8;">
+                    Master distributed systems architecture, scalability patterns, and large-scale system design. Learn to design systems like URL shorteners, social media platforms, streaming services, and more.
+                </p>
 
-            <div class="track-tabs">
-                <button class="track-tab active" onclick="switchTrack('hld')">
-                    High-Level Design (HLD)
-                    <span class="track-badge hld">45 Topics</span>
-                </button>
-                <button class="track-tab" onclick="switchTrack('lld')">
-                    Low-Level Design (LLD)
-                    <span class="track-badge lld">40 Topics</span>
-                </button>
-            </div>
+                <!-- How to Use Guide -->
+                <div class="tip-card" style="margin-bottom: 30px;">
+                    <h3 class="tip-title">🧭 12-Week HLD Mastery Plan (From Basics → Interview Ready)</h3>
+                    <div class="tip-content">
+                        <p style="margin-bottom: 15px;"><strong>📌 How to Use:</strong></p>
+                        <ul>
+                            <li><strong>Time Commitment:</strong> 1–2 hrs/day</li>
+                            <li><strong>Weekly Structure:</strong>
+                                <ul style="margin-top: 8px; margin-left: 20px;">
+                                    <li>3 days → Study concepts</li>
+                                    <li>2 days → Review case studies</li>
+                                    <li>1 day → Solve design problem</li>
+                                    <li>1 day → Revision & practice</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
 
-            <!-- HLD Track -->
-            <div id="hld-track" class="track-content active">
-
+                <!-- HLD Phase 1: Foundations of Distributed Systems -->
                 <div class="phase-card">
                     <div class="phase-header">
                         <div class="phase-badge">HLD Phase 01</div>
-                        <h3 class="phase-title">HLD Foundations</h3>
-                        <div class="phase-duration">Weeks 1-3 • System Design Basics</div>
+                        <h3 class="phase-title">🏁 Foundations of Distributed Systems</h3>
+                        <div class="phase-duration">Weeks 1-3 • Basics + Scalability + Caching</div>
                     </div>
                     <div class="phase-content">
                         <div class="topic-section">
-                        <div class="topic-item" onclick="toggleCheck(this)">
-                            <div class="checkbox"></div>
-                            <div class="topic-content">
-                                <div class="topic-name">System Design Basics & CAP Theorem</div>
-                                <div class="topic-meta">Week 1 • Fundamentals</div>
+                        
+                        <!-- Week 1: Basics + Networking -->
+                        <div class="topic-item">
+                            <div class="topic-main" onclick="toggleTopic(this)">
+                                <div class="checkbox" onclick="event.stopPropagation(); toggleCheck(this.parentElement.parentElement)"></div>
+                                <div class="topic-content">
+                                    <div class="topic-name">Week 1: Basics + Networking</div>
+                                    <div class="topic-meta">System Design Fundamentals • Client-Server • Latency vs Throughput</div>
+                                </div>
+                                <div class="expand-icon">▼</div>
+                            </div>
+                            <div class="topic-details">
+                                <div class="topic-description">
+                                    <strong>Topics to Study:</strong>
+                                    <ul style="margin-top: 10px; margin-left: 20px; color: var(--text-secondary);">
+                                        <li><strong>What is System Design?</strong> - Understanding scale and distributed systems</li>
+                                        <li><strong>Client-Server Architecture</strong> - Request-response model</li>
+                                        <li><strong>Latency vs Throughput</strong> - Performance metrics</li>
+                                        <li><strong>DNS</strong> - Domain Name System resolution</li>
+                                        <li><strong>HTTP/HTTPS</strong> - Web protocols</li>
+                                        <li><strong>TCP vs UDP</strong> - Transport layer protocols</li>
+                                    </ul>
+                                    <p style="margin-top: 15px; color: var(--text-secondary);"><strong>Subtopics:</strong> Request lifecycle, Load vs traffic patterns</p>
+                                    <p style="margin-top: 10px; color: var(--accent-tertiary);"><strong>🎯 Practice:</strong> Design a URL Shortener (basic version)</p>
+                                </div>
+                                <div class="topic-resources">
+                                    <div class="resource-title">📚 Study Resources:</div>
+                                    <div class="resource-links">
+                                        <a href="https://www.youtube.com/watch?v=xpDnVSmNFX0" class="resource-link" target="_blank">Video: System Design Basics</a>
+                                        <a href="https://github.com/donnemartin/system-design-primer" class="resource-link" target="_blank">System Design Primer</a>
+                                        <a href="https://www.educative.io/courses/grokking-modern-system-design-interview-for-engineers-managers" class="resource-link" target="_blank">Educative Course</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="topic-item" onclick="toggleCheck(this)">
-                            <div class="checkbox"></div>
-                            <div class="topic-content">
-                                <div class="topic-name">Scalability & Load Balancing</div>
-                                <div class="topic-meta">Week 1-2 • LB algorithms</div>
+
+                        <!-- Week 2: Scalability Fundamentals -->
+                        <div class="topic-item">
+                            <div class="topic-main" onclick="toggleTopic(this)">
+                                <div class="checkbox" onclick="event.stopPropagation(); toggleCheck(this.parentElement.parentElement)"></div>
+                                <div class="topic-content">
+                                    <div class="topic-name">Week 2: Scalability Fundamentals</div>
+                                    <div class="topic-meta">Vertical vs Horizontal Scaling • Load Balancing</div>
+                                </div>
+                                <div class="expand-icon">▼</div>
+                            </div>
+                            <div class="topic-details">
+                                <div class="topic-description">
+                                    <strong>Topics to Study:</strong>
+                                    <ul style="margin-top: 10px; margin-left: 20px; color: var(--text-secondary);">
+                                        <li><strong>Vertical Scaling</strong> - Increasing single machine capacity</li>
+                                        <li><strong>Horizontal Scaling</strong> - Adding more machines</li>
+                                        <li><strong>Load Balancing</strong> - Distributing traffic across servers</li>
+                                        <li><strong>Round Robin</strong> - Simple rotation distribution</li>
+                                        <li><strong>Least Connections</strong> - Send to least busy server</li>
+                                        <li><strong>Health Checks</strong> - Monitoring server availability</li>
+                                    </ul>
+                                    <p style="margin-top: 10px; color: var(--accent-tertiary);"><strong>🎯 Practice:</strong> Scale your URL shortener with load balancer</p>
+                                </div>
+                                <div class="topic-resources">
+                                    <div class="resource-title">📚 Study Resources:</div>
+                                    <div class="resource-links">
+                                        <a href="https://www.youtube.com/watch?v=K0Ta65OqQkY" class="resource-link" target="_blank">Video: Scalability</a>
+                                        <a href="https://aws.amazon.com/what-is/load-balancing/" class="resource-link" target="_blank">Load Balancing Guide</a>
+                                        <a href="https://www.nginx.com/resources/glossary/load-balancing/" class="resource-link" target="_blank">NGINX Guide</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="topic-item" onclick="toggleCheck(this)">
-                            <div class="checkbox"></div>
-                            <div class="topic-content">
-                                <div class="topic-name">Caching & CDN Basics</div>
-                                <div class="topic-meta">Week 2 • Strategies, eviction</div>
+
+                        <!-- Week 3: Caching -->
+                        <div class="topic-item">
+                            <div class="topic-main" onclick="toggleTopic(this)">
+                                <div class="checkbox" onclick="event.stopPropagation(); toggleCheck(this.parentElement.parentElement)"></div>
+                                <div class="topic-content">
+                                    <div class="topic-name">Week 3: Caching</div>
+                                    <div class="topic-meta">Cache Strategies • Eviction Policies • LRU/LFU</div>
+                                </div>
+                                <div class="expand-icon">▼</div>
+                            </div>
+                            <div class="topic-details">
+                                <div class="topic-description">
+                                    <strong>Topics to Study:</strong>
+                                    <ul style="margin-top: 10px; margin-left: 20px; color: var(--text-secondary);">
+                                        <li><strong>Why Caching?</strong> - Reduce latency, DB load</li>
+                                        <li><strong>Cache Aside</strong> - Lazy loading pattern</li>
+                                        <li><strong>Write-Through</strong> - Update cache and DB together</li>
+                                        <li><strong>Write-Back</strong> - Async DB writes</li>
+                                        <li><strong>LRU (Least Recently Used)</strong> - Eviction strategy</li>
+                                        <li><strong>LFU (Least Frequently Used)</strong> - Alternative eviction</li>
+                                    </ul>
+                                    <p style="margin-top: 10px; color: var(--accent-tertiary);"><strong>🎯 Practice:</strong> Add cache to URL shortener and a read-heavy system</p>
+                                </div>
+                                <div class="topic-resources">
+                                    <div class="resource-title">📚 Study Resources:</div>
+                                    <div class="resource-links">
+                                        <a href="https://www.youtube.com/watch?v=U3RkDLtS7uY" class="resource-link" target="_blank">Video: Caching</a>
+                                        <a href="https://redis.io/docs/manual/patterns/" class="resource-link" target="_blank">Redis Patterns</a>
+                                        <a href="https://aws.amazon.com/caching/" class="resource-link" target="_blank">AWS Caching</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="topic-item" onclick="toggleCheck(this)">
-                            <div class="checkbox"></div>
-                            <div class="topic-content">
-                                <div class="topic-name">SQL vs NoSQL</div>
-                                <div class="topic-meta">Week 2-3 • ACID vs BASE</div>
-                            </div>
-                        </div>
-                        <div class="topic-item" onclick="toggleCheck(this)">
-                            <div class="checkbox"></div>
-                            <div class="topic-content">
-                                <div class="topic-name">REST API Design</div>
-                                <div class="topic-meta">Week 3 • Best practices</div>
-                            </div>
-                        </div>
+
                         </div>
                     </div>
                 </div>
 
-                <!-- HLD Phase 2 -->
+                <!-- HLD Phase 2: Data & Storage -->
                 <div class="phase-card">
                     <div class="phase-header">
                         <div class="phase-badge">HLD Phase 02</div>
-                        <h3 class="phase-title">HLD Intermediate</h3>
-                        <div class="phase-duration">Weeks 4-7 • Distributed Systems</div>
+                        <h3 class="phase-title">🏗️ Data & Storage</h3>
+                        <div class="phase-duration">Weeks 4-6 • Databases, Scaling, CAP Theorem</div>
                     </div>
                     <div class="phase-content">
                         <div class="topic-section">
-                        <div class="topic-item" onclick="toggleCheck(this)">
-                            <div class="checkbox"></div>
-                            <div class="topic-content">
-                                <div class="topic-name">Sharding & Partitioning</div>
-                                <div class="topic-meta">Week 4 • Consistent hashing</div>
+                        
+                        <!-- Week 4: Databases -->
+                        <div class="topic-item">
+                            <div class="topic-main" onclick="toggleTopic(this)">
+                                <div class="checkbox" onclick="event.stopPropagation(); toggleCheck(this.parentElement.parentElement)"></div>
+                                <div class="topic-content">
+                                    <div class="topic-name">Week 4: Databases</div>
+                                    <div class="topic-meta">SQL vs NoSQL • Indexing • Normalization</div>
+                                </div>
+                                <div class="expand-icon">▼</div>
+                            </div>
+                            <div class="topic-details">
+                                <div class="topic-description">
+                                    <strong>Topics to Study:</strong>
+                                    <ul style="margin-top: 10px; margin-left: 20px; color: var(--text-secondary);">
+                                        <li><strong>SQL Databases</strong> - ACID properties, relational model</li>
+                                        <li><strong>NoSQL Databases</strong> - Document, Key-Value, Wide-Column, Graph</li>
+                                        <li><strong>Indexing</strong> - B-trees, performance optimization</li>
+                                        <li><strong>Normalization</strong> - Reducing redundancy</li>
+                                        <li><strong>Denormalization</strong> - Trading space for speed</li>
+                                        <li><strong>Query Optimization</strong> - EXPLAIN, execution plans</li>
+                                    </ul>
+                                    <p style="margin-top: 10px; color: var(--accent-tertiary);"><strong>🎯 Practice:</strong> Choose DB for E-commerce and Chat system</p>
+                                </div>
+                                <div class="topic-resources">
+                                    <div class="resource-title">📚 Study Resources:</div>
+                                    <div class="resource-links">
+                                        <a href="https://www.youtube.com/watch?v=qI_g07C_Q5I" class="resource-link" target="_blank">Video: SQL vs NoSQL</a>
+                                        <a href="https://use-the-index-luke.com/" class="resource-link" target="_blank">Database Indexing</a>
+                                        <a href="https://www.mongodb.com/nosql-explained" class="resource-link" target="_blank">NoSQL Explained</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="topic-item" onclick="toggleCheck(this)">
-                            <div class="checkbox"></div>
-                            <div class="topic-content">
-                                <div class="topic-name">Message Queues & Kafka</div>
-                                <div class="topic-meta">Week 4-5 • Event-driven</div>
+
+                        <!-- Week 5: Scaling Databases -->
+                        <div class="topic-item">
+                            <div class="topic-main" onclick="toggleTopic(this)">
+                                <div class="checkbox" onclick="event.stopPropagation(); toggleCheck(this.parentElement.parentElement)"></div>
+                                <div class="topic-content">
+                                    <div class="topic-name">Week 5: Scaling Databases</div>
+                                    <div class="topic-meta">Replication • Sharding • Partitioning</div>
+                                </div>
+                                <div class="expand-icon">▼</div>
+                            </div>
+                            <div class="topic-details">
+                                <div class="topic-description">
+                                    <strong>Topics to Study:</strong>
+                                    <ul style="margin-top: 10px; margin-left: 20px; color: var(--text-secondary);">
+                                        <li><strong>Replication</strong> - Data redundancy and availability</li>
+                                        <li><strong>Master-Slave</strong> - Write to master, read from slaves</li>
+                                        <li><strong>Master-Master</strong> - Multi-master replication</li>
+                                        <li><strong>Leaderless Systems</strong> - Eventual consistency</li>
+                                        <li><strong>Sharding</strong> - Horizontal partitioning</li>
+                                        <li><strong>Partitioning Strategies</strong> - Range, Hash, List-based</li>
+                                    </ul>
+                                    <p style="margin-top: 10px; color: var(--accent-tertiary);"><strong>🎯 Practice:</strong> Design scalable DB for Instagram</p>
+                                </div>
+                                <div class="topic-resources">
+                                    <div class="resource-title">📚 Study Resources:</div>
+                                    <div class="resource-links">
+                                        <a href="https://www.youtube.com/watch?v=5m4H6gMzgIk" class="resource-link" target="_blank">Video: Database Scaling</a>
+                                        <a href="https://aws.amazon.com/what-is/database-sharding/" class="resource-link" target="_blank">Sharding Guide</a>
+                                        <a href="https://www.digitalocean.com/community/tutorials/understanding-database-sharding" class="resource-link" target="_blank">Database Sharding</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="topic-item" onclick="toggleCheck(this)">
-                            <div class="checkbox"></div>
-                            <div class="topic-content">
-                                <div class="topic-name">Microservices Architecture</div>
-                                <div class="topic-meta">Week 5 • Service discovery</div>
+
+                        <!-- Week 6: CAP + Consistency -->
+                        <div class="topic-item">
+                            <div class="topic-main" onclick="toggleTopic(this)">
+                                <div class="checkbox" onclick="event.stopPropagation(); toggleCheck(this.parentElement.parentElement)"></div>
+                                <div class="topic-content">
+                                    <div class="topic-name">Week 6: CAP Theorem + Consistency</div>
+                                    <div class="topic-meta">Consistency Models • Strong vs Eventual • Quorum</div>
+                                </div>
+                                <div class="expand-icon">▼</div>
+                            </div>
+                            <div class="topic-details">
+                                <div class="topic-description">
+                                    <strong>Topics to Study:</strong>
+                                    <ul style="margin-top: 10px; margin-left: 20px; color: var(--text-secondary);">
+                                        <li><strong>CAP Theorem</strong> - Consistency, Availability, Partition Tolerance</li>
+                                        <li><strong>Trade-offs</strong> - You can only have 2 out of 3</li>
+                                        <li><strong>Strong Consistency</strong> - All nodes see same data</li>
+                                        <li><strong>Eventual Consistency</strong> - Nodes converge over time</li>
+                                        <li><strong>Quorum</strong> - Read/Write quorum for consistency</li>
+                                        <li><strong>Real-world Examples</strong> - Banking vs Social media trade-offs</li>
+                                    </ul>
+                                    <p style="margin-top: 10px; color: var(--accent-tertiary);"><strong>🎯 Practice:</strong> Compare trade-offs in Banking vs Social media systems</p>
+                                </div>
+                                <div class="topic-resources">
+                                    <div class="resource-title">📚 Study Resources:</div>
+                                    <div class="resource-links">
+                                        <a href="https://www.youtube.com/watch?v=k-Yaq8AHlFA" class="resource-link" target="_blank">Video: CAP Theorem</a>
+                                        <a href="https://martin.kleppmann.com/2015/05/11/please-stop-calling-databases-cp-or-ap.html" class="resource-link" target="_blank">CAP Theorem Critique</a>
+                                        <a href="https://jepsen.io/consistency" class="resource-link" target="_blank">Consistency Models</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="topic-item" onclick="toggleCheck(this)">
-                            <div class="checkbox"></div>
-                            <div class="topic-content">
-                                <div class="topic-name">Consistency & Transactions</div>
-                                <div class="topic-meta">Week 6 • 2PC, Saga</div>
-                            </div>
-                        </div>
-                        <div class="topic-item" onclick="toggleCheck(this)">
-                            <div class="checkbox"></div>
-                            <div class="topic-content">
-                                <div class="topic-name">Rate Limiting</div>
-                                <div class="topic-meta">Week 6 • Algorithms</div>
-                            </div>
-                        </div>
-                        <div class="topic-item" onclick="toggleCheck(this)">
-                            <div class="checkbox"></div>
-                            <div class="topic-content">
-                                <div class="topic-name">Search & Elasticsearch</div>
-                                <div class="topic-meta">Week 7 • Indexing</div>
-                            </div>
-                        </div>
-                        <div class="topic-item" onclick="toggleCheck(this)">
-                            <div class="checkbox"></div>
-                            <div class="topic-content">
-                                <div class="topic-name">WebSockets & Real-time</div>
-                                <div class="topic-meta">Week 7 • Live systems</div>
-                            </div>
-                        </div>
+
                         </div>
                     </div>
                 </div>
 
-                <!-- HLD Phase 3 -->
+                <!-- HLD Phase 3: System Building Blocks -->
                 <div class="phase-card">
                     <div class="phase-header">
                         <div class="phase-badge">HLD Phase 03</div>
-                        <h3 class="phase-title">HLD Advanced</h3>
-                        <div class="phase-duration">Weeks 8-10 • Advanced Architecture</div>
+                        <h3 class="phase-title">⚙️ System Building Blocks</h3>
+                        <div class="phase-duration">Weeks 7-9 • Message Queues, Microservices, Reliability</div>
                     </div>
                     <div class="phase-content">
                         <div class="topic-section">
-                        <div class="topic-item" onclick="toggleCheck(this)">
-                            <div class="checkbox"></div>
-                            <div class="topic-content">
-                                <div class="topic-name">Consensus Algorithms</div>
-                                <div class="topic-meta">Week 8 • Paxos, Raft</div>
+                        
+                        <!-- Week 7: Message Queues -->
+                        <div class="topic-item">
+                            <div class="topic-main" onclick="toggleTopic(this)">
+                                <div class="checkbox" onclick="event.stopPropagation(); toggleCheck(this.parentElement.parentElement)"></div>
+                                <div class="topic-content">
+                                    <div class="topic-name">Week 7: Message Queues & Async Systems</div>
+                                    <div class="topic-meta">Kafka • RabbitMQ • Pub-Sub • Event-Driven</div>
+                                </div>
+                                <div class="expand-icon">▼</div>
+                            </div>
+                            <div class="topic-details">
+                                <div class="topic-description">
+                                    <strong>Topics to Study:</strong>
+                                    <ul style="margin-top: 10px; margin-left: 20px; color: var(--text-secondary);">
+                                        <li><strong>Message Queues</strong> - Async communication patterns</li>
+                                        <li><strong>Pub-Sub Pattern</strong> - Publishers and subscribers</li>
+                                        <li><strong>At Least Once Delivery</strong> - Guaranteed delivery</li>
+                                        <li><strong>Exactly Once Delivery</strong> - Idempotent processing</li>
+                                        <li><strong>Retry Mechanisms</strong> - Handling failures</li>
+                                        <li><strong>Apache Kafka</strong> - Distributed streaming platform</li>
+                                        <li><strong>RabbitMQ</strong> - Message broker</li>
+                                    </ul>
+                                    <p style="margin-top: 10px; color: var(--accent-tertiary);"><strong>🎯 Practice:</strong> Design a Notification System</p>
+                                </div>
+                                <div class="topic-resources">
+                                    <div class="resource-title">📚 Study Resources:</div>
+                                    <div class="resource-links">
+                                        <a href="https://www.youtube.com/watch?v=oUJbuFMyBDk" class="resource-link" target="_blank">Video: Message Queues</a>
+                                        <a href="https://kafka.apache.org/intro" class="resource-link" target="_blank">Kafka Documentation</a>
+                                        <a href="https://www.rabbitmq.com/tutorials/tutorial-one-python.html" class="resource-link" target="_blank">RabbitMQ Tutorial</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="topic-item" onclick="toggleCheck(this)">
-                            <div class="checkbox"></div>
-                            <div class="topic-content">
-                                <div class="topic-name">Data Replication</div>
-                                <div class="topic-meta">Week 8 • Multi-master</div>
+
+                        <!-- Week 8: Microservices -->
+                        <div class="topic-item">
+                            <div class="topic-main" onclick="toggleTopic(this)">
+                                <div class="checkbox" onclick="event.stopPropagation(); toggleCheck(this.parentElement.parentElement)"></div>
+                                <div class="topic-content">
+                                    <div class="topic-name">Week 8: Microservices & APIs</div>
+                                    <div class="topic-meta">Service Communication • API Gateway • Discovery</div>
+                                </div>
+                                <div class="expand-icon">▼</div>
+                            </div>
+                            <div class="topic-details">
+                                <div class="topic-description">
+                                    <strong>Topics to Study:</strong>
+                                    <ul style="margin-top: 10px; margin-left: 20px; color: var(--text-secondary);">
+                                        <li><strong>Monolith vs Microservices</strong> - Trade-offs and migration</li>
+                                        <li><strong>Service Communication</strong> - Sync vs Async</li>
+                                        <li><strong>REST APIs</strong> - HTTP-based services</li>
+                                        <li><strong>gRPC</strong> - High-performance RPC framework</li>
+                                        <li><strong>API Gateway</strong> - Single entry point</li>
+                                        <li><strong>Service Discovery</strong> - Finding services dynamically</li>
+                                        <li><strong>Service Mesh</strong> - Infrastructure layer</li>
+                                    </ul>
+                                    <p style="margin-top: 10px; color: var(--accent-tertiary);"><strong>🎯 Practice:</strong> Break monolith into microservices</p>
+                                </div>
+                                <div class="topic-resources">
+                                    <div class="resource-title">📚 Study Resources:</div>
+                                    <div class="resource-links">
+                                        <a href="https://www.youtube.com/watch?v=lTAcCNbJ7KE" class="resource-link" target="_blank">Video: Microservices</a>
+                                        <a href="https://microservices.io/patterns/microservices.html" class="resource-link" target="_blank">Microservices Patterns</a>
+                                        <a href="https://martinfowler.com/articles/microservices.html" class="resource-link" target="_blank">Martin Fowler's Guide</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="topic-item" onclick="toggleCheck(this)">
-                            <div class="checkbox"></div>
-                            <div class="topic-content">
-                                <div class="topic-name">Distributed Caching</div>
-                                <div class="topic-meta">Week 8-9 • Redis cluster</div>
+
+                        <!-- Week 9: Reliability -->
+                        <div class="topic-item">
+                            <div class="topic-main" onclick="toggleTopic(this)">
+                                <div class="checkbox" onclick="event.stopPropagation(); toggleCheck(this.parentElement.parentElement)"></div>
+                                <div class="topic-content">
+                                    <div class="topic-name">Week 9: Reliability & Fault Tolerance</div>
+                                    <div class="topic-meta">Retries • Circuit Breaker • Rate Limiting</div>
+                                </div>
+                                <div class="expand-icon">▼</div>
+                            </div>
+                            <div class="topic-details">
+                                <div class="topic-description">
+                                    <strong>Topics to Study:</strong>
+                                    <ul style="margin-top: 10px; margin-left: 20px; color: var(--text-secondary);">
+                                        <li><strong>Failure Handling</strong> - Graceful degradation</li>
+                                        <li><strong>Retry Mechanisms</strong> - Exponential backoff</li>
+                                        <li><strong>Circuit Breaker</strong> - Prevent cascading failures</li>
+                                        <li><strong>Rate Limiting</strong> - Control request flow</li>
+                                        <li><strong>Bulkhead Pattern</strong> - Isolate failures</li>
+                                        <li><strong>Timeouts</strong> - Don't wait forever</li>
+                                        <li><strong>Health Checks</strong> - Service availability</li>
+                                    </ul>
+                                    <p style="margin-top: 10px; color: var(--accent-tertiary);"><strong>🎯 Practice:</strong> Design a resilient system</p>
+                                </div>
+                                <div class="topic-resources">
+                                    <div class="resource-title">📚 Study Resources:</div>
+                                    <div class="resource-links">
+                                        <a href="https://www.youtube.com/watch?v=Kpn2ajSuperA" class="resource-link" target="_blank">Video: Fault Tolerance</a>
+                                        <a href="https://martinfowler.com/bliki/CircuitBreaker.html" class="resource-link" target="_blank">Circuit Breaker Pattern</a>
+                                        <a href="https://resilience4j.readme.io/docs" class="resource-link" target="_blank">Resilience Patterns</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="topic-item" onclick="toggleCheck(this)">
-                            <div class="checkbox"></div>
-                            <div class="topic-content">
-                                <div class="topic-name">Stream Processing</div>
-                                <div class="topic-meta">Week 9 • Flink, Kafka Streams</div>
-                            </div>
-                        </div>
-                        <div class="topic-item" onclick="toggleCheck(this)">
-                            <div class="checkbox"></div>
-                            <div class="topic-content">
-                                <div class="topic-name">Security at Scale</div>
-                                <div class="topic-meta">Week 9 • OAuth2, JWT</div>
-                            </div>
-                        </div>
-                        <div class="topic-item" onclick="toggleCheck(this)">
-                            <div class="checkbox"></div>
-                            <div class="topic-content">
-                                <div class="topic-name">Observability</div>
-                                <div class="topic-meta">Week 10 • Metrics, logs, traces</div>
-                            </div>
-                        </div>
+
                         </div>
                     </div>
                 </div>
 
-                <!-- HLD Phase 4 -->
+                <!-- HLD Phase 4: Advanced Concepts -->
                 <div class="phase-card">
                     <div class="phase-header">
                         <div class="phase-badge">HLD Phase 04</div>
-                        <h3 class="phase-title">HLD Expert</h3>
-                        <div class="phase-duration">Weeks 11-12 • Production Systems</div>
+                        <h3 class="phase-title">⚡ Advanced Concepts</h3>
+                        <div class="phase-duration">Weeks 10-11 • Performance & Security</div>
                     </div>
                     <div class="phase-content">
                         <div class="topic-section">
-                        <div class="topic-item" onclick="toggleCheck(this)">
-                            <div class="checkbox"></div>
-                            <div class="topic-content">
-                                <div class="topic-name">Multi-Region Architecture</div>
-                                <div class="topic-meta">Week 11 • Global distribution</div>
+                        
+                        <!-- Week 10: Performance -->
+                        <div class="topic-item">
+                            <div class="topic-main" onclick="toggleTopic(this)">
+                                <div class="checkbox" onclick="event.stopPropagation(); toggleCheck(this.parentElement.parentElement)"></div>
+                                <div class="topic-content">
+                                    <div class="topic-name">Week 10: Performance & Optimization</div>
+                                    <div class="topic-meta">CDN • Edge Caching • Compression</div>
+                                </div>
+                                <div class="expand-icon">▼</div>
+                            </div>
+                            <div class="topic-details">
+                                <div class="topic-description">
+                                    <strong>Topics to Study:</strong>
+                                    <ul style="margin-top: 10px; margin-left: 20px; color: var(--text-secondary);">
+                                        <li><strong>CDN (Content Delivery Network)</strong> - Distribute content globally</li>
+                                        <li><strong>Edge Caching</strong> - Cache at edge locations</li>
+                                        <li><strong>Compression</strong> - Gzip, Brotli</li>
+                                        <li><strong>Lazy Loading</strong> - Load on demand</li>
+                                        <li><strong>Database Optimization</strong> - Query tuning</li>
+                                        <li><strong>Cloudflare</strong> - CDN provider</li>
+                                        <li><strong>Amazon CloudFront</strong> - AWS CDN</li>
+                                    </ul>
+                                    <p style="margin-top: 10px; color: var(--accent-tertiary);"><strong>🎯 Practice:</strong> Optimize a Video Streaming System</p>
+                                </div>
+                                <div class="topic-resources">
+                                    <div class="resource-title">📚 Study Resources:</div>
+                                    <div class="resource-links">
+                                        <a href="https://www.youtube.com/watch?v=8zX0rue2Hic" class="resource-link" target="_blank">Video: CDN</a>
+                                        <a href="https://www.cloudflare.com/learning/cdn/what-is-a-cdn/" class="resource-link" target="_blank">What is CDN?</a>
+                                        <a href="https://web.dev/performance-optimizing-content-efficiency/" class="resource-link" target="_blank">Performance Guide</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="topic-item" onclick="toggleCheck(this)">
-                            <div class="checkbox"></div>
-                            <div class="topic-content">
-                                <div class="topic-name">Disaster Recovery</div>
-                                <div class="topic-meta">Week 11 • HA, RTO/RPO</div>
+
+                        <!-- Week 11: Security -->
+                        <div class="topic-item">
+                            <div class="topic-main" onclick="toggleTopic(this)">
+                                <div class="checkbox" onclick="event.stopPropagation(); toggleCheck(this.parentElement.parentElement)"></div>
+                                <div class="topic-content">
+                                    <div class="topic-name">Week 11: Security & Monitoring</div>
+                                    <div class="topic-meta">OAuth • JWT • Logging • Observability</div>
+                                </div>
+                                <div class="expand-icon">▼</div>
+                            </div>
+                            <div class="topic-details">
+                                <div class="topic-description">
+                                    <strong>Topics to Study:</strong>
+                                    <ul style="margin-top: 10px; margin-left: 20px; color: var(--text-secondary);">
+                                        <li><strong>Authentication</strong> - Verify who you are</li>
+                                        <li><strong>Authorization</strong> - What you can access</li>
+                                        <li><strong>OAuth 2.0</strong> - Delegated authorization</li>
+                                        <li><strong>JWT (JSON Web Tokens)</strong> - Stateless auth</li>
+                                        <li><strong>Logging</strong> - Centralized logging systems</li>
+                                        <li><strong>Monitoring</strong> - Metrics and alerts</li>
+                                        <li><strong>Observability</strong> - Logs, metrics, traces</li>
+                                    </ul>
+                                    <p style="margin-top: 10px; color: var(--accent-tertiary);"><strong>🎯 Practice:</strong> Secure an API System</p>
+                                </div>
+                                <div class="topic-resources">
+                                    <div class="resource-title">📚 Study Resources:</div>
+                                    <div class="resource-links">
+                                        <a href="https://www.youtube.com/watch?v=996OiexHze0" class="resource-link" target="_blank">Video: OAuth 2.0</a>
+                                        <a href="https://jwt.io/introduction" class="resource-link" target="_blank">JWT Introduction</a>
+                                        <a href="https://www.datadoghq.com/knowledge-center/observability/" class="resource-link" target="_blank">Observability Guide</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="topic-item" onclick="toggleCheck(this)">
-                            <div class="checkbox"></div>
-                            <div class="topic-content">
-                                <div class="topic-name">Capacity Planning</div>
-                                <div class="topic-meta">Week 11 • Cost optimization</div>
-                            </div>
-                        </div>
-                        <div class="topic-item" onclick="toggleCheck(this)">
-                            <div class="checkbox"></div>
-                            <div class="topic-content">
-                                <div class="topic-name">Tradeoff Analysis</div>
-                                <div class="topic-meta">Week 12 • Decision making</div>
-                            </div>
-                        </div>
+
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- LLD Track -->
-            <div id="lld-track" class="track-content">
-                <!-- LLD Phase 1 -->
+                <!-- HLD Phase 5: Real System Design -->
+                <div class="phase-card">
+                    <div class="phase-header">
+                        <div class="phase-badge">HLD Phase 05</div>
+                        <h3 class="phase-title">🏆 Real System Design Practice</h3>
+                        <div class="phase-duration">Week 12 • Full System Implementation</div>
+                    </div>
+                    <div class="phase-content">
+                        <div class="topic-section">
+                        
+                        <!-- Week 12: Full Systems -->
+                        <div class="topic-item">
+                            <div class="topic-main" onclick="toggleTopic(this)">
+                                <div class="checkbox" onclick="event.stopPropagation(); toggleCheck(this.parentElement.parentElement)"></div>
+                                <div class="topic-content">
+                                    <div class="topic-name">Week 12: Full System Design Problems</div>
+                                    <div class="topic-meta">1 System Per Day • End-to-End Practice</div>
+                                </div>
+                                <div class="expand-icon">▼</div>
+                            </div>
+                            <div class="topic-details">
+                                <div class="topic-description">
+                                    <strong>Daily Practice - Design These Systems:</strong>
+                                    <ul style="margin-top: 10px; margin-left: 20px; color: var(--text-secondary);">
+                                        <li><strong>Day 1: URL Shortener</strong> - Hashing, Custom short URLs, Analytics</li>
+                                        <li><strong>Day 2: Instagram</strong> - Photo upload, Feed generation, Followers</li>
+                                        <li><strong>Day 3: WhatsApp</strong> - Real-time messaging, Group chats, Last seen</li>
+                                        <li><strong>Day 4: Uber</strong> - Matching algorithm, Location tracking, ETA</li>
+                                        <li><strong>Day 5: YouTube</strong> - Video upload, Streaming, Recommendations</li>
+                                        <li><strong>Day 6: Netflix</strong> - Content delivery, Recommendations, Encoding</li>
+                                        <li><strong>Day 7: Twitter</strong> - Tweets, Timeline, Trending, Hashtags</li>
+                                    </ul>
+                                    <p style="margin-top: 15px; color: var(--accent-secondary);"><strong>⚠️ CRITICAL:</strong> For each system, cover: Requirements, Capacity Estimation, API Design, Database Schema, High-Level Architecture, Deep Dives, Trade-offs</p>
+                                </div>
+                                <div class="topic-resources">
+                                    <div class="resource-title">📚 Study Resources:</div>
+                                    <div class="resource-links">
+                                        <a href="https://github.com/donnemartin/system-design-primer#system-design-interview-questions-with-solutions" class="resource-link" target="_blank">System Design Problems</a>
+                                        <a href="https://www.youtube.com/c/GauravSensei" class="resource-link" target="_blank">Gaurav Sen Channel</a>
+                                        <a href="https://www.educative.io/courses/grokking-the-system-design-interview" class="resource-link" target="_blank">Grokking System Design</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Must-Master HLD Topics Checklist -->
+                <div class="section" style="margin-top: 40px;">
+                    <div class="tip-card">
+                        <h3 class="tip-title">🧠 Must-Master HLD Topics (Checklist)</h3>
+                        <div class="tip-content">
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                                <div>
+                                    <p style="margin-bottom: 10px;"><strong>🔹 Core Concepts:</strong></p>
+                                    <ul>
+                                        <li>Scalability</li>
+                                        <li>Load Balancing</li>
+                                        <li>Caching</li>
+                                        <li>Databases</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <p style="margin-bottom: 10px;"><strong>🔹 Distributed Systems:</strong></p>
+                                    <ul>
+                                        <li>CAP Theorem</li>
+                                        <li>Consistency Models</li>
+                                        <li>Replication</li>
+                                        <li>Sharding</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <p style="margin-bottom: 10px;"><strong>🔹 Architecture:</strong></p>
+                                    <ul>
+                                        <li>Microservices</li>
+                                        <li>API Design</li>
+                                        <li>Event-driven Systems</li>
+                                        <li>Message Queues</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <p style="margin-bottom: 10px;"><strong>🔹 Reliability:</strong></p>
+                                    <ul>
+                                        <li>Fault Tolerance</li>
+                                        <li>Rate Limiting</li>
+                                        <li>Circuit Breaker</li>
+                                        <li>Health Checks</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <p style="margin-bottom: 10px;"><strong>🔹 Performance:</strong></p>
+                                    <ul>
+                                        <li>CDN</li>
+                                        <li>Compression</li>
+                                        <li>Lazy Loading</li>
+                                        <li>Edge Caching</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <p style="margin-bottom: 10px;"><strong>🔹 Security:</strong></p>
+                                    <ul>
+                                        <li>OAuth & JWT</li>
+                                        <li>Encryption</li>
+                                        <li>HTTPS/TLS</li>
+                                        <li>API Security</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Real Problems Checklist -->
+                <div class="section" style="margin-top: 20px;">
+                    <div class="tip-card">
+                        <h3 class="tip-title">🧪 Real Problems You Must Solve</h3>
+                        <div class="tip-content">
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                                <ul>
+                                    <li>✅ URL Shortener</li>
+                                    <li>✅ Instagram</li>
+                                    <li>✅ WhatsApp</li>
+                                </ul>
+                                <ul>
+                                    <li>✅ Uber</li>
+                                    <li>✅ Netflix/YouTube</li>
+                                    <li>✅ Twitter</li>
+                                </ul>
+                                <ul>
+                                    <li>✅ Notification System</li>
+                                    <li>✅ Rate Limiter</li>
+                                    <li>✅ Web Crawler</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Best Resources -->
+                <div class="section" style="margin-top: 20px;">
+                    <div class="tip-card">
+                        <h3 class="tip-title">📚 Best Resources</h3>
+                        <div class="tip-content">
+                            <p style="margin-bottom: 15px;"><strong>YouTube Channels:</strong></p>
+                            <ul style="margin-bottom: 20px;">
+                                <li><a href="https://www.youtube.com/c/GauravSensei" target="_blank" style="color: var(--accent-primary);">Gaurav Sen</a> - System Design concepts</li>
+                                <li><a href="https://github.com/donnemartin/system-design-primer" target="_blank" style="color: var(--accent-primary);">System Design Primer</a> - Comprehensive guide</li>
+                            </ul>
+                            <p style="margin-bottom: 15px;"><strong>Courses:</strong></p>
+                            <ul style="margin-bottom: 20px;">
+                                <li><a href="https://www.educative.io/courses/grokking-the-system-design-interview" target="_blank" style="color: var(--accent-primary);">Educative.io - Grokking System Design</a></li>
+                                <li><a href="https://www.educative.io/courses/grokking-modern-system-design-interview-for-engineers-managers" target="_blank" style="color: var(--accent-primary);">Modern System Design</a></li>
+                            </ul>
+                            <p style="margin-bottom: 15px;"><strong>Books:</strong></p>
+                            <ul>
+                                <li><strong>Designing Data-Intensive Applications</strong> by Martin Kleppmann (Bible of System Design)</li>
+                                <li><strong>System Design Interview</strong> by Alex Xu (Vol 1 & 2)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Weekly Revision Strategy -->
+                <div class="section" style="margin-top: 20px;">
+                    <div class="tip-card">
+                        <h3 class="tip-title">🔁 Weekly Revision Strategy</h3>
+                        <div class="tip-content">
+                            <ul>
+                                <li><strong>Redesign 1 old system every week</strong> - Refresh your memory</li>
+                                <li><strong>Improve trade-offs</strong> - Think about different approaches</li>
+                                <li><strong>Add missing components</strong> - What did you forget?</li>
+                                <li><strong>Compare with references</strong> - Learn from others' solutions</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Common Mistakes -->
+                <div class="section" style="margin-top: 20px;">
+                    <div class="tip-card">
+                        <h3 class="tip-title">⚠️ Common Mistakes to Avoid</h3>
+                        <div class="tip-content">
+                            <ul>
+                                <li><strong>❌ Jumping to diagrams too early</strong> - Clarify requirements first!</li>
+                                <li><strong>❌ Ignoring trade-offs</strong> - Always explain pros/cons of choices</li>
+                                <li><strong>❌ Overcomplicating</strong> - Start simple, then scale</li>
+                                <li><strong>❌ Not asking clarifying questions</strong> - Understand the problem scope</li>
+                                <li><strong>❌ Ignoring numbers</strong> - Do back-of-envelope calculations</li>
+                                <li><strong>❌ One-size-fits-all</strong> - Different systems need different approaches</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Final Outcome -->
+                <div class="section" style="margin-top: 20px;">
+                    <div class="tip-card" style="background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(255, 107, 157, 0.1)); border: 2px solid var(--accent-primary);">
+                        <h3 class="tip-title">🎯 Final Outcome - After 12 Weeks</h3>
+                        <div class="tip-content">
+                            <p style="margin-bottom: 15px;">You should be able to:</p>
+                            <ul>
+                                <li><strong>✅ Break down any system</strong> into components</li>
+                                <li><strong>✅ Choose correct architecture</strong> for given requirements</li>
+                                <li><strong>✅ Explain trade-offs clearly</strong> with reasoning</li>
+                                <li><strong>✅ Handle real interviews confidently</strong> at top companies</li>
+                                <li><strong>✅ Scale systems</strong> from zero to millions of users</li>
+                                <li><strong>✅ Debug distributed systems</strong> issues</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- END HLD TRACK PAGE -->
+
+        <!-- LLD TRACK PAGE -->
+        <div class="page-view" id="page-lld">
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-number">🧩</div>
+                    <h2 class="section-title">Low-Level Design (LLD) Track</h2>
+                </div>
+
+                <p style="color: var(--text-secondary); margin-bottom: 30px; line-height: 1.8;">
+                    Learn design patterns, SOLID principles, and object-oriented analysis. Design systems like parking lots, elevators, chess games, and other code-level architectures.
+                </p>
+
+                <!-- LLD Phase 1: Core Foundations -->
                 <div class="phase-card">
                     <div class="phase-header">
                         <div class="phase-badge">LLD Phase 01</div>
-                        <h3 class="phase-title">LLD Foundations</h3>
-                        <div class="phase-duration">Weeks 1-3 • OOP & Patterns</div>
+                        <h3 class="phase-title">🧱 Core Foundations</h3>
+                        <div class="phase-duration">Weeks 1-3 • OOP & SOLID Principles</div>
                     </div>
                     <div class="phase-content">
                         <div class="topic-section">
-                        <div class="topic-item" onclick="toggleCheck(this)">
-                            <div class="checkbox"></div>
-                            <div class="topic-content">
-                                <div class="topic-name">SOLID Principles</div>
-                                <div class="topic-meta">Week 1 • OOP foundation</div>
+                        <div class="topic-item">
+                            <div class="topic-main" onclick="toggleTopic(this)">
+                                <div class="checkbox" onclick="event.stopPropagation(); toggleCheck(this.parentElement.parentElement)"></div>
+                                <div class="topic-content">
+                                    <div class="topic-name">Object-Oriented Programming (OOP)</div>
+                                    <div class="topic-meta">Week 1 • Classes, Inheritance, Polymorphism</div>
+                                </div>
+                                <div class="expand-icon">▼</div>
+                            </div>
+                            <div class="topic-details">
+                                <div class="topic-description">
+                                    <strong>What to Study:</strong>
+                                    <ul style="margin-top: 10px; margin-left: 20px; color: var(--text-secondary);">
+                                        <li><strong>Classes & Objects</strong> - Master the fundamentals</li>
+                                        <li><strong>Encapsulation</strong> - Data hiding and access control</li>
+                                        <li><strong>Abstraction</strong> - Hiding implementation details</li>
+                                        <li><strong>Inheritance</strong> - Code reuse through parent-child relationships</li>
+                                        <li><strong>Polymorphism</strong> - Compile-time vs Runtime polymorphism</li>
+                                        <li><strong>Composition vs Inheritance</strong> - ⚠️ VERY important for interviews!</li>
+                                        <li><strong>Practice</strong> - Identify when to use composition over inheritance</li>
+                                    </ul>
+                                </div>
+                                <div class="topic-resources">
+                                    <div class="resource-title">📚 Study Resources:</div>
+                                    <div class="resource-links">
+                                        <a href="https://www.youtube.com/watch?v=pTB0EiLXUC8" class="resource-link" target="_blank">Video: OOP Fundamentals</a>
+                                        <a href="https://refactoring.guru/design-patterns/what-is-pattern" class="resource-link" target="_blank">OOP Basics</a>
+                                        <a href="https://www.geeksforgeeks.org/object-oriented-programming-oops-concept-in-java/" class="resource-link" target="_blank">OOP in Java</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="topic-item" onclick="toggleCheck(this)">
-                            <div class="checkbox"></div>
-                            <div class="topic-content">
-                                <div class="topic-name">Creational Patterns</div>
-                                <div class="topic-meta">Week 2 • Singleton, Factory, Builder</div>
+
+                        <div class="topic-item">
+                            <div class="topic-main" onclick="toggleTopic(this)">
+                                <div class="checkbox" onclick="event.stopPropagation(); toggleCheck(this.parentElement.parentElement)"></div>
+                                <div class="topic-content">
+                                    <div class="topic-name">SOLID Principles (Interview Favorite)</div>
+                                    <div class="topic-meta">Week 2 • SRP, OCP, LSP, ISP, DIP</div>
+                                </div>
+                                <div class="expand-icon">▼</div>
+                            </div>
+                            <div class="topic-details">
+                                <div class="topic-description">
+                                    <strong>What to Study:</strong>
+                                    <ul style="margin-top: 10px; margin-left: 20px; color: var(--text-secondary);">
+                                        <li><strong>Single Responsibility (SRP)</strong> - One class, one reason to change</li>
+                                        <li><strong>Open/Closed (OCP)</strong> - Open for extension, closed for modification</li>
+                                        <li><strong>Liskov Substitution (LSP)</strong> - Subtypes must be substitutable</li>
+                                        <li><strong>Interface Segregation (ISP)</strong> - No fat interfaces</li>
+                                        <li><strong>Dependency Inversion (DIP)</strong> - Depend on abstractions</li>
+                                        <li><strong>Practice</strong> - ⚠️ You MUST identify violations and refactor code live!</li>
+                                    </ul>
+                                </div>
+                                <div class="topic-resources">
+                                    <div class="resource-title">📚 Study Resources:</div>
+                                    <div class="resource-links">
+                                        <a href="https://www.youtube.com/watch?v=rtmFCcjEgEw" class="resource-link" target="_blank">Video: SOLID Explained</a>
+                                        <a href="https://www.digitalocean.com/community/conceptual-articles/s-o-l-i-d-the-first-five-principles-of-object-oriented-design" class="resource-link" target="_blank">SOLID Guide</a>
+                                        <a href="https://refactoring.guru/design-patterns/principles" class="resource-link" target="_blank">Design Principles</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="topic-item" onclick="toggleCheck(this)">
-                            <div class="checkbox"></div>
-                            <div class="topic-content">
-                                <div class="topic-name">Structural Patterns</div>
-                                <div class="topic-meta">Week 3 • Adapter, Decorator, Proxy</div>
+
+                        <div class="topic-item">
+                            <div class="topic-main" onclick="toggleTopic(this)">
+                                <div class="checkbox" onclick="event.stopPropagation(); toggleCheck(this.parentElement.parentElement)"></div>
+                                <div class="topic-content">
+                                    <div class="topic-name">Clean Code & Design Basics</div>
+                                    <div class="topic-meta">Week 3 • DRY, KISS, YAGNI</div>
+                                </div>
+                                <div class="expand-icon">▼</div>
                             </div>
-                        </div>
-                        <div class="topic-item" onclick="toggleCheck(this)">
-                            <div class="checkbox"></div>
-                            <div class="topic-content">
-                                <div class="topic-name">UML & Class Design</div>
-                                <div class="topic-meta">Week 3 • Diagrams</div>
+                            <div class="topic-details">
+                                <div class="topic-description">
+                                    <strong>What to Study:</strong>
+                                    <ul style="margin-top: 10px; margin-left: 20px; color: var(--text-secondary);">
+                                        <li><strong>DRY</strong> - Don't Repeat Yourself</li>
+                                        <li><strong>KISS</strong> - Keep It Simple, Stupid</li>
+                                        <li><strong>YAGNI</strong> - You Aren't Gonna Need It</li>
+                                        <li><strong>Code Readability</strong> - Clear naming conventions</li>
+                                        <li><strong>Code Smells</strong> - Identify problematic patterns</li>
+                                        <li><strong>Refactoring Techniques</strong> - Transform code without changing behavior</li>
+                                    </ul>
+                                </div>
+                                <div class="topic-resources">
+                                    <div class="resource-title">📚 Study Resources:</div>
+                                    <div class="resource-links">
+                                        <a href="https://www.youtube.com/watch?v=7EmboKQH8lM" class="resource-link" target="_blank">Video: Clean Code</a>
+                                        <a href="https://refactoring.guru/refactoring/smells" class="resource-link" target="_blank">Code Smells</a>
+                                        <a href="https://github.com/ryanmcdermott/clean-code-javascript" class="resource-link" target="_blank">Clean Code Examples</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- LLD Phase 2 -->
+                <!-- LLD Phase 2: Design Patterns -->
                 <div class="phase-card">
                     <div class="phase-header">
                         <div class="phase-badge">LLD Phase 02</div>
-                        <h3 class="phase-title">LLD Intermediate</h3>
-                        <div class="phase-duration">Weeks 4-7 • Advanced Patterns</div>
+                        <h3 class="phase-title">🏗️ Design Patterns (High ROI)</h3>
+                        <div class="phase-duration">Weeks 4-7 • Creational, Structural, Behavioral</div>
                     </div>
                     <div class="phase-content">
                         <div class="topic-section">
-                        <div class="topic-item" onclick="toggleCheck(this)">
-                            <div class="checkbox"></div>
-                            <div class="topic-content">
-                                <div class="topic-name">Behavioral Patterns</div>
-                                <div class="topic-meta">Week 4-5 • Observer, Strategy, Command</div>
+                        <div class="topic-item">
+                            <div class="topic-main" onclick="toggleTopic(this)">
+                                <div class="checkbox" onclick="event.stopPropagation(); toggleCheck(this.parentElement.parentElement)"></div>
+                                <div class="topic-content">
+                                    <div class="topic-name">Creational Patterns</div>
+                                    <div class="topic-meta">Week 4-5 • Singleton, Factory, Builder</div>
+                                </div>
+                                <div class="expand-icon">▼</div>
+                            </div>
+                            <div class="topic-details">
+                                <div class="topic-description">
+                                    <strong>What to Study:</strong>
+                                    <ul style="margin-top: 10px; margin-left: 20px; color: var(--text-secondary);">
+                                        <li><strong>Singleton</strong> - Single instance control + thread-safety</li>
+                                        <li><strong>Factory Method</strong> - Object creation through interface</li>
+                                        <li><strong>Abstract Factory</strong> - Families of related objects</li>
+                                        <li><strong>Builder</strong> - Complex object construction</li>
+                                        <li><strong>Prototype</strong> - Cloning objects</li>
+                                        <li><strong>When to use each</strong> - Real-world applications & scenarios</li>
+                                    </ul>
+                                </div>
+                                <div class="topic-resources">
+                                    <div class="resource-title">📚 Study Resources:</div>
+                                    <div class="resource-links">
+                                        <a href="https://refactoring.guru/design-patterns/creational-patterns" class="resource-link" target="_blank">Creational Patterns</a>
+                                        <a href="https://www.youtube.com/watch?v=EcFVTgRHJLM" class="resource-link" target="_blank">Video: Design Patterns</a>
+                                        <a href="https://sourcemaking.com/design_patterns/creational_patterns" class="resource-link" target="_blank">Pattern Examples</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="topic-item" onclick="toggleCheck(this)">
-                            <div class="checkbox"></div>
-                            <div class="topic-content">
-                                <div class="topic-name">Concurrency Patterns</div>
-                                <div class="topic-meta">Week 5-6 • Thread safety</div>
+
+                        <div class="topic-item">
+                            <div class="topic-main" onclick="toggleTopic(this)">
+                                <div class="checkbox" onclick="event.stopPropagation(); toggleCheck(this.parentElement.parentElement)"></div>
+                                <div class="topic-content">
+                                    <div class="topic-name">Structural Patterns</div>
+                                    <div class="topic-meta">Week 5-6 • Adapter, Decorator, Proxy</div>
+                                </div>
+                                <div class="expand-icon">▼</div>
+                            </div>
+                            <div class="topic-details">
+                                <div class="topic-description">
+                                    <strong>What to Study:</strong>
+                                    <ul style="margin-top: 10px; margin-left: 20px; color: var(--text-secondary);">
+                                        <li><strong>Adapter</strong> - Convert interfaces for compatibility</li>
+                                        <li><strong>Decorator</strong> - Add responsibilities dynamically</li>
+                                        <li><strong>Facade</strong> - Simplified interface to complex subsystem</li>
+                                        <li><strong>Composite</strong> - Tree structures, treat parts uniformly</li>
+                                        <li><strong>Proxy</strong> - Control access to objects</li>
+                                        <li><strong>Object Composition</strong> - How to compose objects and classes effectively</li>
+                                    </ul>
+                                </div>
+                                <div class="topic-resources">
+                                    <div class="resource-title">📚 Study Resources:</div>
+                                    <div class="resource-links">
+                                        <a href="https://refactoring.guru/design-patterns/structural-patterns" class="resource-link" target="_blank">Structural Patterns</a>
+                                        <a href="https://www.youtube.com/watch?v=v9ejT8FO-7I" class="resource-link" target="_blank">Video: Structural</a>
+                                        <a href="https://sourcemaking.com/design_patterns/structural_patterns" class="resource-link" target="_blank">Examples</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="topic-item" onclick="toggleCheck(this)">
-                            <div class="checkbox"></div>
-                            <div class="topic-content">
-                                <div class="topic-name">State Machines</div>
-                                <div class="topic-meta">Week 6 • FSM design</div>
+
+                        <div class="topic-item">
+                            <div class="topic-main" onclick="toggleTopic(this)">
+                                <div class="checkbox" onclick="event.stopPropagation(); toggleCheck(this.parentElement.parentElement)"></div>
+                                <div class="topic-content">
+                                    <div class="topic-name">Behavioral Patterns</div>
+                                    <div class="topic-meta">Week 6-7 • Strategy, Observer, Command</div>
+                                </div>
+                                <div class="expand-icon">▼</div>
                             </div>
-                        </div>
-                        <div class="topic-item" onclick="toggleCheck(this)">
-                            <div class="checkbox"></div>
-                            <div class="topic-content">
-                                <div class="topic-name">Clean Architecture</div>
-                                <div class="topic-meta">Week 7 • Hexagonal, Onion</div>
+                            <div class="topic-details">
+                                <div class="topic-description">
+                                    <strong>What to Study:</strong>
+                                    <ul style="margin-top: 10px; margin-left: 20px; color: var(--text-secondary);">
+                                        <li><strong>Strategy</strong> - Encapsulate algorithms, make them interchangeable</li>
+                                        <li><strong>Observer</strong> - ⚠️ VERY COMMON! One-to-many dependency</li>
+                                        <li><strong>Command</strong> - Encapsulate requests as objects</li>
+                                        <li><strong>State</strong> - Object behavior changes based on state</li>
+                                        <li><strong>Chain of Responsibility</strong> - Pass requests along chain</li>
+                                        <li><strong>Template Method</strong> - Define algorithm skeleton</li>
+                                        <li><strong>Iterator</strong> - Sequential access without exposing structure</li>
+                                        <li><strong>Mediator</strong> - Centralize complex communications</li>
+                                    </ul>
+                                </div>
+                                <div class="topic-resources">
+                                    <div class="resource-title">📚 Study Resources:</div>
+                                    <div class="resource-links">
+                                        <a href="https://refactoring.guru/design-patterns/behavioral-patterns" class="resource-link" target="_blank">Behavioral Patterns</a>
+                                        <a href="https://www.youtube.com/watch?v=v9ejT8FO-7I" class="resource-link" target="_blank">Video: Behavioral</a>
+                                        <a href="https://sourcemaking.com/design_patterns/behavioral_patterns" class="resource-link" target="_blank">Examples</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- LLD Phase 3 -->
+                <!-- LLD Phase 3: UML & Object Modeling -->
                 <div class="phase-card">
                     <div class="phase-header">
                         <div class="phase-badge">LLD Phase 03</div>
-                        <h3 class="phase-title">LLD Advanced</h3>
-                        <div class="phase-duration">Weeks 8-10 • Complex Systems</div>
+                        <h3 class="phase-title">🧩 UML & Object Modeling</h3>
+                        <div class="phase-duration">Weeks 8-9 • Design Representation & Relationships</div>
                     </div>
                     <div class="phase-content">
                         <div class="topic-section">
-                        <div class="topic-item" onclick="toggleCheck(this)">
-                            <div class="checkbox"></div>
-                            <div class="topic-content">
-                                <div class="topic-name">Lock-free Concurrency</div>
-                                <div class="topic-meta">Week 8 • CAS operations</div>
+                        <div class="topic-item">
+                            <div class="topic-main" onclick="toggleTopic(this)">
+                                <div class="checkbox" onclick="event.stopPropagation(); toggleCheck(this.parentElement.parentElement)"></div>
+                                <div class="topic-content">
+                                    <div class="topic-name">UML Diagrams (Class Diagram is Key)</div>
+                                    <div class="topic-meta">Week 8 • Class, Sequence, Use Case</div>
+                                </div>
+                                <div class="expand-icon">▼</div>
+                            </div>
+                            <div class="topic-details">
+                                <div class="topic-description">
+                                    <strong>What to Study:</strong>
+                                    <ul style="margin-top: 10px; margin-left: 20px; color: var(--text-secondary);">
+                                        <li><strong>Class Diagrams</strong> - ⚠️ MOST IMPORTANT! Classes, attributes, methods, relationships</li>
+                                        <li><strong>Sequence Diagrams</strong> - Object interactions over time</li>
+                                        <li><strong>Use Case Diagrams</strong> - System functionality from user perspective</li>
+                                        <li><strong>Activity Diagrams</strong> - Workflow and process flow</li>
+                                        <li><strong>Interview Focus</strong> - You'll mostly draw class diagrams + relationships</li>
+                                    </ul>
+                                </div>
+                                <div class="topic-resources">
+                                    <div class="resource-title">📚 Study Resources:</div>
+                                    <div class="resource-links">
+                                        <a href="https://www.youtube.com/watch?v=WnMQ8HlmeXc" class="resource-link" target="_blank">Video: UML Diagrams</a>
+                                        <a href="https://www.visual-paradigm.com/guide/uml-unified-modeling-language/what-is-class-diagram/" class="resource-link" target="_blank">Class Diagram Guide</a>
+                                        <a href="https://www.lucidchart.com/pages/uml-class-diagram" class="resource-link" target="_blank">UML Tutorial</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="topic-item" onclick="toggleCheck(this)">
-                            <div class="checkbox"></div>
-                            <div class="topic-content">
-                                <div class="topic-name">Memory Management</div>
-                                <div class="topic-meta">Week 9 • Optimization</div>
+
+                        <div class="topic-item">
+                            <div class="topic-main" onclick="toggleTopic(this)">
+                                <div class="checkbox" onclick="event.stopPropagation(); toggleCheck(this.parentElement.parentElement)"></div>
+                                <div class="topic-content">
+                                    <div class="topic-name">Object Modeling & Relationships</div>
+                                    <div class="topic-meta">Week 9 • Association, Aggregation, Composition</div>
+                                </div>
+                                <div class="expand-icon">▼</div>
                             </div>
-                        </div>
-                        <div class="topic-item" onclick="toggleCheck(this)">
-                            <div class="checkbox"></div>
-                            <div class="topic-content">
-                                <div class="topic-name">Domain-Driven Design</div>
-                                <div class="topic-meta">Week 9-10 • DDD patterns</div>
-                            </div>
-                        </div>
-                        <div class="topic-item" onclick="toggleCheck(this)">
-                            <div class="checkbox"></div>
-                            <div class="topic-content">
-                                <div class="topic-name">Event Sourcing & CQRS</div>
-                                <div class="topic-meta">Week 10 • Event stores</div>
+                            <div class="topic-details">
+                                <div class="topic-description">
+                                    <strong>What to Study:</strong>
+                                    <ul style="margin-top: 10px; margin-left: 20px; color: var(--text-secondary);">
+                                        <li><strong>Identify Entities</strong> - Recognize key objects in problem domain</li>
+                                        <li><strong>Association</strong> - General relationship between objects</li>
+                                        <li><strong>Aggregation</strong> - "Has-a" relationship (weak ownership)</li>
+                                        <li><strong>Composition</strong> - "Owns-a" relationship (strong ownership)</li>
+                                        <li><strong>Dependency</strong> - One class uses another</li>
+                                        <li><strong>Define Responsibilities</strong> - Assign clear roles to each class</li>
+                                        <li><strong>Apply SOLID</strong> - Validate design against principles</li>
+                                        <li><strong>Loose Coupling</strong> - Master interfaces for flexibility</li>
+                                        <li><strong>Edge Cases</strong> - Handle boundary conditions</li>
+                                    </ul>
+                                </div>
+                                <div class="topic-resources">
+                                    <div class="resource-title">📚 Study Resources:</div>
+                                    <div class="resource-links">
+                                        <a href="https://www.youtube.com/watch?v=3cmzqDZuqxM" class="resource-link" target="_blank">Video: Relationships</a>
+                                        <a href="https://www.geeksforgeeks.org/association-composition-aggregation-java/" class="resource-link" target="_blank">Relationships Guide</a>
+                                        <a href="https://springframework.guru/gang-of-four-design-patterns/" class="resource-link" target="_blank">Design Thinking</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- LLD Phase 4 -->
+                <!-- LLD Phase 4: Practice & Advanced Concepts -->
                 <div class="phase-card">
                     <div class="phase-header">
                         <div class="phase-badge">LLD Phase 04</div>
-                        <h3 class="phase-title">LLD Mastery & Interview Prep</h3>
-                        <div class="phase-duration">Weeks 11-12 • Practice & Polish</div>
+                        <h3 class="phase-title">🧪 Practice Problems & Advanced Topics</h3>
+                        <div class="phase-duration">Weeks 10-12 • Real Systems & Concurrency</div>
                     </div>
                     <div class="phase-content">
                         <div class="topic-section">
-                        <div class="topic-item" onclick="toggleCheck(this)">
-                            <div class="checkbox"></div>
-                            <div class="topic-content">
-                                <div class="topic-name">Mock Interviews (5+ sessions)</div>
-                                <div class="topic-meta">Week 11-12 • Timed practice</div>
+                        <div class="topic-item">
+                            <div class="topic-main" onclick="toggleTopic(this)">
+                                <div class="checkbox" onclick="event.stopPropagation(); toggleCheck(this.parentElement.parentElement)"></div>
+                                <div class="topic-content">
+                                    <div class="topic-name">Common LLD Interview Problems (Must Practice)</div>
+                                    <div class="topic-meta">Week 10-11 • Parking Lot, Library, Elevator</div>
+                                </div>
+                                <div class="expand-icon">▼</div>
+                            </div>
+                            <div class="topic-details">
+                                <div class="topic-description">
+                                    <strong>What to Study:</strong>
+                                    <ul style="margin-top: 10px; margin-left: 20px; color: var(--text-secondary);">
+                                        <li><strong>Parking Lot System</strong> - Multi-level, vehicle types, pricing</li>
+                                        <li><strong>Library Management</strong> - Books, members, lending/returning</li>
+                                        <li><strong>Movie Ticket Booking</strong> - Shows, seats, payments</li>
+                                        <li><strong>Elevator System</strong> - Request handling, scheduling</li>
+                                        <li><strong>ATM</strong> - Cash withdrawal, balance, transactions</li>
+                                        <li><strong>Splitwise</strong> - Expense splitting, debts, settlements</li>
+                                        <li><strong>LRU Cache</strong> - Cache eviction policy implementation</li>
+                                        <li><strong>File System</strong> - Directories, files, permissions</li>
+                                        <li><strong>Notification System</strong> - Multi-channel, preferences</li>
+                                        <li><strong>Chess Game</strong> - Pieces, moves, rules validation</li>
+                                        <li><strong>⚠️ CRITICAL</strong> - Must implement at least 5-7 systems hands-on!</li>
+                                    </ul>
+                                </div>
+                                <div class="topic-resources">
+                                    <div class="resource-title">📚 Study Resources:</div>
+                                    <div class="resource-links">
+                                        <a href="https://github.com/tssovi/grokking-the-object-oriented-design-interview" class="resource-link" target="_blank">LLD Problems</a>
+                                        <a href="https://www.youtube.com/watch?v=DSGsa0pu8-k" class="resource-link" target="_blank">Video: Parking Lot</a>
+                                        <a href="https://leetcode.com/discuss/interview-question/object-oriented-design/" class="resource-link" target="_blank">LeetCode OOD</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="topic-item" onclick="toggleCheck(this)">
-                            <div class="checkbox"></div>
-                            <div class="topic-content">
-                                <div class="topic-name">Communication Skills</div>
-                                <div class="topic-meta">Week 12 • Whiteboarding</div>
+
+                        <div class="topic-item">
+                            <div class="topic-main" onclick="toggleTopic(this)">
+                                <div class="checkbox" onclick="event.stopPropagation(); toggleCheck(this.parentElement.parentElement)"></div>
+                                <div class="topic-content">
+                                    <div class="topic-name">Concurrency & Thread Safety (High Value)</div>
+                                    <div class="topic-meta">Week 11 • Race Conditions, Locks, Thread-safe</div>
+                                </div>
+                                <div class="expand-icon">▼</div>
+                            </div>
+                            <div class="topic-details">
+                                <div class="topic-description">
+                                    <strong>What to Study:</strong>
+                                    <ul style="margin-top: 10px; margin-left: 20px; color: var(--text-secondary);">
+                                        <li><strong>Race Conditions</strong> - Understand and prevent concurrent bugs</li>
+                                        <li><strong>Locks/Mutex</strong> - Synchronization primitives</li>
+                                        <li><strong>Thread-safe Singleton</strong> - Proper implementation patterns</li>
+                                        <li><strong>Producer-Consumer</strong> - Classic concurrency pattern</li>
+                                        <li><strong>Executor/Thread Pools</strong> - Efficient thread management</li>
+                                        <li><strong>⚠️ HIGH VALUE</strong> - Often ignored but critical for senior roles!</li>
+                                    </ul>
+                                </div>
+                                <div class="topic-resources">
+                                    <div class="resource-title">📚 Study Resources:</div>
+                                    <div class="resource-links">
+                                        <a href="https://www.youtube.com/watch?v=eQk5AWcTS8w" class="resource-link" target="_blank">Video: Concurrency</a>
+                                        <a href="https://jenkov.com/tutorials/java-concurrency/index.html" class="resource-link" target="_blank">Java Concurrency</a>
+                                        <a href="https://www.baeldung.com/java-thread-safety" class="resource-link" target="_blank">Thread Safety</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="topic-item">
+                            <div class="topic-main" onclick="toggleTopic(this)">
+                                <div class="checkbox" onclick="event.stopPropagation(); toggleCheck(this.parentElement.parentElement)"></div>
+                                <div class="topic-content">
+                                    <div class="topic-name">API Design & Refactoring</div>
+                                    <div class="topic-meta">Week 12 • REST APIs, Code Improvement</div>
+                                </div>
+                                <div class="expand-icon">▼</div>
+                            </div>
+                            <div class="topic-details">
+                                <div class="topic-description">
+                                    <strong>What to Study:</strong>
+                                    <ul style="margin-top: 10px; margin-left: 20px; color: var(--text-secondary);">
+                                        <li><strong>REST API Basics</strong> - HTTP methods, resources, endpoints</li>
+                                        <li><strong>Request/Response Modeling</strong> - Structure data properly</li>
+                                        <li><strong>Validation</strong> - Input validation strategies</li>
+                                        <li><strong>Error Handling</strong> - Graceful failure, meaningful messages</li>
+                                        <li><strong>Versioning</strong> - API evolution strategies</li>
+                                        <li><strong>Identify Bad Design</strong> - Code smell detection</li>
+                                        <li><strong>Improve Extensibility</strong> - Design for future changes</li>
+                                        <li><strong>Remove Tight Coupling</strong> - Dependency management</li>
+                                        <li><strong>Write Testable Code</strong> - Design for testing</li>
+                                        <li><strong>Coupling vs Cohesion</strong> - Balance dependencies</li>
+                                        <li><strong>Immutability</strong> - Thread-safe, predictable objects</li>
+                                        <li><strong>Idempotency</strong> - Safe retry operations</li>
+                                    </ul>
+                                </div>
+                                <div class="topic-resources">
+                                    <div class="resource-title">📚 Study Resources:</div>
+                                    <div class="resource-links">
+                                        <a href="https://abdulrwahab.medium.com/api-architecture-best-practices-for-designing-rest-apis-bf907025f5f" class="resource-link" target="_blank">REST API Design</a>
+                                        <a href="https://refactoring.guru/refactoring" class="resource-link" target="_blank">Refactoring Guide</a>
+                                        <a href="https://www.youtube.com/watch?v=0oXYLzuucwE" class="resource-link" target="_blank">Video: API Design</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
 
-        <!-- Weekly Roadmap - Compact Table -->
-        <section class="section">
-            <div class="section-header">
-                <div class="section-number">02</div>
-                <h2 class="section-title">12-Week Detailed Roadmap</h2>
-            </div>
+                <!-- LLD Strategy Guide -->
+                <div class="section" style="margin-top: 40px;">
+                    <div class="tip-card">
+                        <h3 class="tip-title">🎯 How Interviewers Judge You</h3>
+                        <div class="tip-content">
+                            <p style="margin-bottom: 15px;">They don't care if you remember patterns. They check:</p>
+                            <ul>
+                                <li><strong>Can you break down a problem?</strong> - Clear thinking matters</li>
+                                <li><strong>Can you model objects cleanly?</strong> - Proper OOP application</li>
+                                <li><strong>Can you justify design decisions?</strong> - Trade-offs awareness</li>
+                                <li><strong>Can you evolve the design?</strong> - Extensibility thinking</li>
+                            </ul>
+                        </div>
+                    </div>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th style="width: 8%">Week</th>
-                        <th style="width: 35%">Topics</th>
-                        <th style="width: 35%">Practice</th>
-                        <th style="width: 12%">Resources</th>
-                        <th style="width: 10%">Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><div class="week-number">01</div></td>
-                        <td>
-                            <ul class="week-topics">
-                                <li>System Design Intro & CAP Theorem</li>
-                                <li>Scalability (Vertical/Horizontal)</li>
-                                <li>SOLID Principles Deep Dive</li>
+                    <div class="tip-card">
+                        <h3 class="tip-title">🚀 Execution Strategy</h3>
+                        <div class="tip-content">
+                            <p style="margin-bottom: 15px;"><strong>Don't just "study". Do this:</strong></p>
+                            <ul>
+                                <li>Learn concept → Immediately implement (Java/Node)</li>
+                                <li>Solve 1 design problem → Refactor using SOLID</li>
+                                <li>Draw class diagrams → Get feedback</li>
+                                <li>Practice explaining decisions out loud</li>
                             </ul>
-                        </td>
-                        <td>
-                            <ul class="week-topics">
-                                <li>Design URL shortener (basic)</li>
-                                <li>Implement SOLID in code</li>
-                            </ul>
-                        </td>
-                        <td>
-                            <span class="resource-tag">YouTube</span>
-                            <span class="resource-tag">Blog</span>
-                        </td>
-                        <td>
-                            <select class="status-select" onchange="updateProgress()">
-                                <option value="not-started">Not Started</option>
-                                <option value="in-progress">In Progress</option>
-                                <option value="done">Done</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><div class="week-number">02</div></td>
-                        <td>
-                            <ul class="week-topics">
-                                <li>Load Balancing Algorithms</li>
-                                <li>Caching (LRU, LFU)</li>
-                                <li>Creational Design Patterns</li>
-                            </ul>
-                        </td>
-                        <td>
-                            <ul class="week-topics">
-                                <li>Design Parking Lot (LLD)</li>
-                                <li>Implement Factory & Builder</li>
-                            </ul>
-                        </td>
-                        <td>
-                            <span class="resource-tag">Video</span>
-                            <span class="resource-tag">Practice</span>
-                        </td>
-                        <td>
-                            <select class="status-select" onchange="updateProgress()">
-                                <option value="not-started">Not Started</option>
-                                <option value="in-progress">In Progress</option>
-                                <option value="done">Done</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><div class="week-number">03</div></td>
-                        <td>
-                            <ul class="week-topics">
-                                <li>SQL vs NoSQL Deep Dive</li>
-                                <li>REST API Design</li>
-                                <li>Structural Patterns & UML</li>
-                            </ul>
-                        </td>
-                        <td>
-                            <ul class="week-topics">
-                                <li>Design social media timeline</li>
-                                <li>UML for library system</li>
-                            </ul>
-                        </td>
-                        <td>
-                            <span class="resource-tag">Article</span>
-                            <span class="resource-tag">GitHub</span>
-                        </td>
-                        <td>
-                            <select class="status-select" onchange="updateProgress()">
-                                <option value="not-started">Not Started</option>
-                                <option value="in-progress">In Progress</option>
-                                <option value="done">Done</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><div class="week-number">04</div></td>
-                        <td>
-                            <ul class="week-topics">
-                                <li>Sharding & Consistent Hashing</li>
-                                <li>Message Queues (Kafka)</li>
-                                <li>Behavioral Patterns</li>
-                            </ul>
-                        </td>
-                        <td>
-                            <ul class="week-topics">
-                                <li>Design Instagram feed</li>
-                                <li>Implement Observer pattern</li>
-                            </ul>
-                        </td>
-                        <td>
-                            <span class="resource-tag">Course</span>
-                        </td>
-                        <td>
-                            <select class="status-select" onchange="updateProgress()">
-                                <option value="not-started">Not Started</option>
-                                <option value="in-progress">In Progress</option>
-                                <option value="done">Done</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><div class="week-number">05</div></td>
-                        <td>
-                            <ul class="week-topics">
-                                <li>Microservices Architecture</li>
-                                <li>Service Discovery, API Gateway</li>
-                                <li>Concurrency & Thread Safety</li>
-                            </ul>
-                        </td>
-                        <td>
-                            <ul class="week-topics">
-                                <li>Design Uber ride-sharing</li>
-                                <li>Design Elevator System (LLD)</li>
-                            </ul>
-                        </td>
-                        <td>
-                            <span class="resource-tag">YouTube</span>
-                            <span class="resource-tag">Book</span>
-                        </td>
-                        <td>
-                            <select class="status-select" onchange="updateProgress()">
-                                <option value="not-started">Not Started</option>
-                                <option value="in-progress">In Progress</option>
-                                <option value="done">Done</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><div class="week-number">06</div></td>
-                        <td>
-                            <ul class="week-topics">
-                                <li>Consistency Models</li>
-                                <li>Distributed Transactions</li>
-                                <li>Rate Limiting</li>
-                            </ul>
-                        </td>
-                        <td>
-                            <ul class="week-topics">
-                                <li>Design Twitter timeline</li>
-                                <li>Implement rate limiter</li>
-                            </ul>
-                        </td>
-                        <td>
-                            <span class="resource-tag">Video</span>
-                        </td>
-                        <td>
-                            <select class="status-select" onchange="updateProgress()">
-                                <option value="not-started">Not Started</option>
-                                <option value="in-progress">In Progress</option>
-                                <option value="done">Done</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><div class="week-number">07</div></td>
-                        <td>
-                            <ul class="week-topics">
-                                <li>Search Systems & Elasticsearch</li>
-                                <li>WebSockets & Real-time</li>
-                                <li>Clean Architecture</li>
-                            </ul>
-                        </td>
-                        <td>
-                            <ul class="week-topics">
-                                <li>Design autocomplete</li>
-                                <li>Design Chess Game (LLD)</li>
-                            </ul>
-                        </td>
-                        <td>
-                            <span class="resource-tag">Article</span>
-                        </td>
-                        <td>
-                            <select class="status-select" onchange="updateProgress()">
-                                <option value="not-started">Not Started</option>
-                                <option value="in-progress">In Progress</option>
-                                <option value="done">Done</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><div class="week-number">08</div></td>
-                        <td>
-                            <ul class="week-topics">
-                                <li>Consensus (Paxos, Raft)</li>
-                                <li>Data Replication</li>
-                                <li>Lock-free Concurrency</li>
-                            </ul>
-                        </td>
-                        <td>
-                            <ul class="week-topics">
-                                <li>Design Netflix streaming</li>
-                                <li>Design distributed cache</li>
-                            </ul>
-                        </td>
-                        <td>
-                            <span class="resource-tag">Course</span>
-                            <span class="resource-tag">Paper</span>
-                        </td>
-                        <td>
-                            <select class="status-select" onchange="updateProgress()">
-                                <option value="not-started">Not Started</option>
-                                <option value="in-progress">In Progress</option>
-                                <option value="done">Done</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><div class="week-number">09</div></td>
-                        <td>
-                            <ul class="week-topics">
-                                <li>Stream Processing</li>
-                                <li>Security (OAuth2, JWT)</li>
-                                <li>Domain-Driven Design</li>
-                            </ul>
-                        </td>
-                        <td>
-                            <ul class="week-topics">
-                                <li>Design WhatsApp</li>
-                                <li>Design payment system</li>
-                            </ul>
-                        </td>
-                        <td>
-                            <span class="resource-tag">YouTube</span>
-                        </td>
-                        <td>
-                            <select class="status-select" onchange="updateProgress()">
-                                <option value="not-started">Not Started</option>
-                                <option value="in-progress">In Progress</option>
-                                <option value="done">Done</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><div class="week-number">10</div></td>
-                        <td>
-                            <ul class="week-topics">
-                                <li>Observability & Monitoring</li>
-                                <li>CDN Architecture</li>
-                                <li>Event Sourcing & CQRS</li>
-                            </ul>
-                        </td>
-                        <td>
-                            <ul class="week-topics">
-                                <li>Design YouTube recommendations</li>
-                                <li>Design notification service</li>
-                            </ul>
-                        </td>
-                        <td>
-                            <span class="resource-tag">Practice</span>
-                        </td>
-                        <td>
-                            <select class="status-select" onchange="updateProgress()">
-                                <option value="not-started">Not Started</option>
-                                <option value="in-progress">In Progress</option>
-                                <option value="done">Done</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><div class="week-number">11</div></td>
-                        <td>
-                            <ul class="week-topics">
-                                <li>Multi-Region Architecture</li>
-                                <li>Disaster Recovery & HA</li>
-                                <li>Capacity Planning</li>
-                            </ul>
-                        </td>
-                        <td>
-                            <ul class="week-topics">
-                                <li>Design Google Drive/Dropbox</li>
-                                <li>Mock interviews (2 sessions)</li>
-                            </ul>
-                        </td>
-                        <td>
-                            <span class="resource-tag">Interview</span>
-                        </td>
-                        <td>
-                            <select class="status-select" onchange="updateProgress()">
-                                <option value="not-started">Not Started</option>
-                                <option value="in-progress">In Progress</option>
-                                <option value="done">Done</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><div class="week-number">12</div></td>
-                        <td>
-                            <ul class="week-topics">
-                                <li>Advanced Tradeoffs</li>
-                                <li>Interview Communication</li>
-                                <li>Final Revision</li>
-                            </ul>
-                        </td>
-                        <td>
-                            <ul class="week-topics">
-                                <li>Mock interviews (3 sessions)</li>
-                                <li>Review all designs</li>
-                            </ul>
-                        </td>
-                        <td>
-                            <span class="resource-tag">Mock</span>
-                        </td>
-                        <td>
-                            <select class="status-select" onchange="updateProgress()">
-                                <option value="not-started">Not Started</option>
-                                <option value="in-progress">In Progress</option>
-                                <option value="done">Done</option>
-                            </select>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
+                        </div>
+                    </div>
 
-        <!-- Tips Section -->
-        <section class="section">
-            <div class="section-header">
-                <div class="section-number">03</div>
-                <h2 class="section-title">Interview Tips & Strategy</h2>
-            </div>
-
-            <div class="tip-card">
-                <h3 class="tip-title">📋 Interview Structure (45-60 min)</h3>
-                <div class="tip-content">
-                    <ul>
-                        <li><strong>5 min:</strong> Clarify requirements & gather constraints</li>
-                        <li><strong>5 min:</strong> High-level architecture & components</li>
-                        <li><strong>10 min:</strong> Deep dive into core components</li>
-                        <li><strong>10 min:</strong> Database schema & data flow</li>
-                        <li><strong>10 min:</strong> Scalability & bottlenecks</li>
-                        <li><strong>5 min:</strong> Tradeoffs & monitoring</li>
-                    </ul>
+                    <div class="tip-card">
+                        <h3 class="tip-title">⚠️ Common Mistakes to Avoid</h3>
+                        <div class="tip-content">
+                            <ul>
+                                <li>❌ Jumping to code too early</li>
+                                <li>❌ Overusing design patterns</li>
+                                <li>❌ Ignoring edge cases</li>
+                                <li>❌ Tight coupling everywhere</li>
+                                <li>❌ No explanation of decisions</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </div>
+        <!-- END LLD TRACK PAGE -->
 
-            <div class="tip-card">
-                <h3 class="tip-title">✅ Communication Best Practices</h3>
-                <div class="tip-content">
-                    <ul>
-                        <li>Think out loud - show your reasoning</li>
-                        <li>Start broad, then drill down</li>
-                        <li>Discuss tradeoffs explicitly</li>
-                        <li>Use numbers: QPS, storage, bandwidth</li>
-                        <li>Ask for feedback: "Does this approach work?"</li>
-                        <li>Don't jump to solutions immediately</li>
-                    </ul>
+        <!-- NOTES PAGE -->
+        <div class="page-view" id="page-notes">
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-number">📝</div>
+                    <h2 class="section-title">My Personal Notes</h2>
+                </div>
+
+                <div class="notes-container">
+                    <div class="notes-header">
+                        <div class="notes-title">📝 Study Notes</div>
+                    </div>
+
+                    <div class="notes-info">
+                        💡 <strong>Tip:</strong> Your notes are saved in your browser. Use <strong>Download Notes</strong> to backup to a file, and <strong>Import Notes</strong> to restore from a file.
+                    </div>
+
+                    <div class="note-actions">
+                        <button class="note-btn note-btn-secondary" onclick="downloadNotes()">⬇️ Download Notes</button>
+                        <div class="file-input-wrapper">
+                            <button class="note-btn note-btn-secondary">⬆️ Import Notes</button>
+                            <input type="file" id="importNotesFile" accept=".txt,.json" onchange="importNotes(event)">
+                        </div>
+                        <button class="note-btn note-btn-secondary" onclick="clearAllNotes()">🗑️ Clear All Notes</button>
+                    </div>
+
+                    <div class="note-input-area">
+                        <textarea 
+                            id="noteInput" 
+                            class="note-textarea" 
+                            placeholder="Write your notes here... (e.g., key concepts, interview tips, things to remember)"
+                        ></textarea>
+                        <button class="note-btn" onclick="addNote()">+ Add Note</button>
+                    </div>
+
+                    <div class="notes-list" id="notesList">
+                        <div class="no-notes">No notes yet. Start adding your thoughts and insights!</div>
+                    </div>
                 </div>
             </div>
+        </div>
+        <!-- END NOTES PAGE -->
 
-            <div class="tip-card">
-                <h3 class="tip-title">⚠️ Common Mistakes to Avoid</h3>
-                <div class="tip-content">
-                    <ul>
-                        <li>Jumping into code without understanding</li>
-                        <li>Over-engineering or under-engineering</li>
-                        <li>Ignoring non-functional requirements</li>
-                        <li>Not discussing tradeoffs</li>
-                        <li>Skipping capacity estimation</li>
-                        <li>Using buzzwords without understanding</li>
-                    </ul>
+        <!-- TIPS PAGE -->
+        <div class="page-view" id="page-tips">
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-number">💡</div>
+                    <h2 class="section-title">Interview Tips & Strategy</h2>
+                </div>
+
+                <div class="tip-card">
+                    <h3 class="tip-title">📋 Interview Structure (45-60 min)</h3>
+                    <div class="tip-content">
+                        <ul>
+                            <li><strong>5 min:</strong> Clarify requirements & gather constraints</li>
+                            <li><strong>5 min:</strong> High-level architecture & components</li>
+                            <li><strong>10 min:</strong> Deep dive into core components</li>
+                            <li><strong>10 min:</strong> Database schema & data flow</li>
+                            <li><strong>10 min:</strong> Scalability & bottlenecks</li>
+                            <li><strong>5 min:</strong> Tradeoffs & monitoring</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="tip-card">
+                    <h3 class="tip-title">✅ Communication Best Practices</h3>
+                    <div class="tip-content">
+                        <ul>
+                            <li>Think out loud - show your reasoning</li>
+                            <li>Start broad, then drill down</li>
+                            <li>Discuss tradeoffs explicitly</li>
+                            <li>Ask clarifying questions early</li>
+                            <li>Use diagrams and visual aids</li>
+                            <li>Acknowledge constraints and limitations</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="tip-card">
+                    <h3 class="tip-title">⚠️ Common Mistakes to Avoid</h3>
+                    <div class="tip-content">
+                        <ul>
+                            <li>Jumping to implementation too quickly</li>
+                            <li>Ignoring non-functional requirements</li>
+                            <li>Not considering scale</li>
+                            <li>Over-engineering for simple problems</li>
+                            <li>Forgetting to discuss monitoring</li>
+                            <li>Not validating assumptions</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="tip-card">
+                    <h3 class="tip-title">📚 Essential Resources</h3>
+                    <div class="tip-content">
+                        <ul>
+                            <li><a href="https://github.com/donnemartin/system-design-primer" target="_blank" style="color: var(--accent-primary)">System Design Primer (GitHub)</a></li>
+                            <li><a href="https://algomaster.io/learn/system-design" target="_blank" style="color: var(--accent-primary)">AlgoMaster System Design</a></li>
+                            <li><a href="https://refactoring.guru/design-patterns" target="_blank" style="color: var(--accent-primary)">Refactoring Guru (Design Patterns)</a></li>
+                            <li><a href="https://www.youtube.com/watch?v=AK0hu0Zxua4" target="_blank" style="color: var(--accent-primary)">System Design Playlist (YouTube)</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-
-            <div class="tip-card">
-                <h3 class="tip-title">🔄 Revision Strategy</h3>
-                <div class="tip-content">
-                    <ul>
-                        <li><strong>Weekly:</strong> Review all topics covered</li>
-                        <li><strong>Bi-weekly:</strong> Revisit 2-3 design problems</li>
-                        <li><strong>Monthly:</strong> Take comprehensive mock interview</li>
-                        <li>Create flashcards for key concepts</li>
-                        <li>Maintain design journal with pros/cons</li>
-                        <li>Last 2 weeks: 80% mock interviews</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="tip-card">
-                <h3 class="tip-title">🎯 Daily Study Routine (1-2 hours)</h3>
-                <div class="tip-content">
-                    <ul>
-                        <li><strong>Mon-Wed:</strong> Theory + HLD (30 min + 60 min)</li>
-                        <li><strong>Thu-Fri:</strong> LLD practice (30 min + 60 min)</li>
-                        <li><strong>Saturday:</strong> Full system design (90 min)</li>
-                        <li><strong>Sunday:</strong> Review week & plan next</li>
-                        <li>Always timebox problems</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="tip-card">
-                <h3 class="tip-title">📚 Essential Resources</h3>
-                <div class="tip-content">
-                    <strong>YouTube Channels:</strong>
-                    <ul>
-                        <li>Gaurav Sen (Primary)</li>
-                        <li>Tech Dummies (Narendra L)</li>
-                        <li>sudoCODE</li>
-                        <li>codeKarle</li>
-                    </ul>
-                    <strong>Books:</strong>
-                    <ul>
-                        <li>Designing Data-Intensive Applications</li>
-                        <li>System Design Interview Vol 1 & 2</li>
-                        <li>Clean Architecture</li>
-                    </ul>
-                    <strong>Practice:</strong>
-                    <ul>
-                        <li><a href="https://youtu.be/AK0hu0Zxua4?si=_xZs4rQQFUJV3C2L" target="_blank">Primary Reference Playlist</a></li>
-                        <li><a href="https://github.com/donnemartin/system-design-primer" target="_blank">System Design Primer</a></li>
-                        <li><a href="https://github.com/ashishps1/awesome-system-design-resources" target="_blank">Awesome Resources</a></li>
-                    </ul>
-                </div>
-            </div>
-        </section>
+        </div>
+        <!-- END TIPS PAGE -->
 
         <footer>
             <p>System Design Mastery Tracker • Built for dedicated learners</p>
@@ -1502,44 +2319,74 @@
             <p style="margin-top: 20px; color: var(--text-muted);">⭐ Track daily • Stay consistent • Master the craft</p>
         </footer>
     </div>
+    </div>
 
     <script>
-        function switchTrack(track) {
-            // Update tabs
-            document.querySelectorAll('.track-tab').forEach(tab => tab.classList.remove('active'));
-            event.target.closest('.track-tab').classList.add('active');
-            
-            // Update content
-            document.querySelectorAll('.track-content').forEach(content => content.classList.remove('active'));
-            document.getElementById(track + '-track').classList.add('active');
+        // Sidebar Toggle
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.querySelector('.sidebar-overlay');
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
         }
 
-        function toggleCheck(element) {
-            const checkbox = element.querySelector('.checkbox');
+        // Show Page - Main navigation function
+        function showPage(pageName) {
+            // Hide all pages
+            document.querySelectorAll('.page-view').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show selected page
+            document.getElementById('page-' + pageName).classList.add('active');
+            
+            // Update sidebar active state
+            document.querySelectorAll('.sidebar-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            event.target.closest('.sidebar-link').classList.add('active');
+            
+            // Close sidebar on mobile
+            if (window.innerWidth <= 768) {
+                toggleSidebar();
+            }
+
+            // Scroll to top of page
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Toggle Topic Details
+        function toggleTopic(element) {
+            const topicItem = element.parentElement;
+            topicItem.classList.toggle('expanded');
+        }
+
+        // Toggle Checkbox
+        function toggleCheckbox(checkbox) {
             checkbox.classList.toggle('checked');
             updateProgress();
             saveProgress();
         }
 
+        // Toggle Check (called from topic item)
+        function toggleCheck(topicItem) {
+            const checkbox = topicItem.querySelector('.checkbox');
+            checkbox.classList.toggle('checked');
+            updateProgress();
+            saveProgress();
+        }
+
+        // Update Progress
         function updateProgress() {
             const allCheckboxes = document.querySelectorAll('.checkbox');
             const checkedBoxes = document.querySelectorAll('.checkbox.checked');
-            const allSelects = document.querySelectorAll('.status-select');
             
-            // Count HLD and LLD separately
-            const hldCheckboxes = document.querySelectorAll('#hld-track .checkbox');
-            const lldCheckboxes = document.querySelectorAll('#lld-track .checkbox');
-            const hldChecked = document.querySelectorAll('#hld-track .checkbox.checked');
-            const lldChecked = document.querySelectorAll('#lld-track .checkbox.checked');
+            const hldCheckboxes = document.querySelectorAll('#page-hld .checkbox');
+            const lldCheckboxes = document.querySelectorAll('#page-lld .checkbox');
+            const hldChecked = document.querySelectorAll('#page-hld .checkbox.checked');
+            const lldChecked = document.querySelectorAll('#page-lld .checkbox.checked');
             
-            let doneCount = 0;
-            let inProgressCount = 0;
-            allSelects.forEach(select => {
-                if (select.value === 'done') doneCount++;
-                if (select.value === 'in-progress') inProgressCount++;
-            });
-
-            const totalTopics = 85;
+            const totalTopics = 36;
             const completedTopics = checkedBoxes.length;
             
             document.getElementById('hldTotal').textContent = hldChecked.length + '/' + hldCheckboxes.length;
@@ -1551,41 +2398,199 @@
             document.getElementById('progressBar').style.width = progressPercentage + '%';
         }
 
+        // Save Progress
         function saveProgress() {
             const checkboxStates = [];
             document.querySelectorAll('.checkbox').forEach((checkbox) => {
                 checkboxStates.push(checkbox.classList.contains('checked'));
             });
-            
-            const selectStates = [];
-            document.querySelectorAll('.status-select').forEach(select => {
-                selectStates.push(select.value);
-            });
-            
             localStorage.setItem('sysdesign_checkboxes', JSON.stringify(checkboxStates));
-            localStorage.setItem('sysdesign_selects', JSON.stringify(selectStates));
         }
 
+        // Load Progress
         function loadProgress() {
             const checkboxStates = JSON.parse(localStorage.getItem('sysdesign_checkboxes') || '[]');
-            const selectStates = JSON.parse(localStorage.getItem('sysdesign_selects') || '[]');
-            
             document.querySelectorAll('.checkbox').forEach((checkbox, index) => {
                 if (checkboxStates[index]) {
                     checkbox.classList.add('checked');
                 }
             });
-            
-            document.querySelectorAll('.status-select').forEach((select, index) => {
-                if (selectStates[index]) {
-                    select.value = selectStates[index];
-                }
-            });
-            
             updateProgress();
         }
 
-        window.addEventListener('load', loadProgress);
+        // Notes functionality
+        function addNote() {
+            const noteInput = document.getElementById('noteInput');
+            const noteText = noteInput.value.trim();
+            
+            if (noteText === '') {
+                alert('Please write something before adding a note!');
+                return;
+            }
+            
+            const notes = JSON.parse(localStorage.getItem('systemdesign_notes') || '[]');
+            
+            const newNote = {
+                id: Date.now(),
+                text: noteText,
+                date: new Date().toLocaleString()
+            };
+            
+            notes.unshift(newNote);
+            localStorage.setItem('systemdesign_notes', JSON.stringify(notes));
+            
+            noteInput.value = '';
+            displayNotes();
+        }
+
+        function deleteNote(noteId) {
+            if (!confirm('Are you sure you want to delete this note?')) {
+                return;
+            }
+            
+            let notes = JSON.parse(localStorage.getItem('systemdesign_notes') || '[]');
+            notes = notes.filter(note => note.id !== noteId);
+            localStorage.setItem('systemdesign_notes', JSON.stringify(notes));
+            displayNotes();
+        }
+
+        function displayNotes() {
+            const notesList = document.getElementById('notesList');
+            const notes = JSON.parse(localStorage.getItem('systemdesign_notes') || '[]');
+            
+            if (notes.length === 0) {
+                notesList.innerHTML = '<div class="no-notes">No notes yet. Start adding your thoughts and insights!</div>';
+                return;
+            }
+            
+            notesList.innerHTML = notes.map(note => `
+                <div class="note-item">
+                    <div class="note-header">
+                        <div class="note-date">${note.date}</div>
+                        <button class="note-delete" onclick="deleteNote(${note.id})">Delete</button>
+                    </div>
+                    <div class="note-content">${escapeHtml(note.text)}</div>
+                </div>
+            `).join('');
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Download notes as a file
+        function downloadNotes() {
+            const notes = JSON.parse(localStorage.getItem('systemdesign_notes') || '[]');
+            
+            if (notes.length === 0) {
+                alert('No notes to download!');
+                return;
+            }
+            
+            let fileContent = 'System Design Mastery - Personal Notes\n';
+            fileContent += '='.repeat(50) + '\n';
+            fileContent += `Downloaded: ${new Date().toLocaleString()}\n`;
+            fileContent += '='.repeat(50) + '\n\n';
+            
+            notes.forEach((note, index) => {
+                fileContent += `Note #${index + 1}\n`;
+                fileContent += `Date: ${note.date}\n`;
+                fileContent += '-'.repeat(50) + '\n';
+                fileContent += `${note.text}\n\n`;
+            });
+            
+            fileContent += '\n\n' + '='.repeat(50) + '\n';
+            fileContent += 'JSON DATA (for import - do not edit)\n';
+            fileContent += '='.repeat(50) + '\n';
+            fileContent += JSON.stringify(notes, null, 2);
+            
+            const blob = new Blob([fileContent], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `system-design-notes-${new Date().toISOString().split('T')[0]}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            alert('Notes downloaded successfully!');
+        }
+
+        // Import notes from a file
+        function importNotes(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const content = e.target.result;
+                    let notes = [];
+                    
+                    if (content.trim().startsWith('[')) {
+                        notes = JSON.parse(content);
+                    } else {
+                        const jsonMatch = content.match(/JSON DATA[\s\S]*?\n([\s\S]*?)$/);
+                        if (jsonMatch) {
+                            notes = JSON.parse(jsonMatch[1]);
+                        } else {
+                            throw new Error('Could not find valid notes data in file');
+                        }
+                    }
+                    
+                    if (!Array.isArray(notes) || notes.length === 0) {
+                        throw new Error('Invalid notes format');
+                    }
+                    
+                    const existingNotes = JSON.parse(localStorage.getItem('systemdesign_notes') || '[]');
+                    const mergedNotes = [...notes, ...existingNotes];
+                    
+                    const uniqueNotes = mergedNotes.filter((note, index, self) =>
+                        index === self.findIndex(n => n.id === note.id || n.text === note.text)
+                    );
+                    
+                    localStorage.setItem('systemdesign_notes', JSON.stringify(uniqueNotes));
+                    displayNotes();
+                    
+                    alert(`Successfully imported ${notes.length} notes!`);
+                } catch (error) {
+                    alert('Error importing notes: ' + error.message);
+                }
+                
+                event.target.value = '';
+            };
+            
+            reader.readAsText(file);
+        }
+
+        // Clear all notes
+        function clearAllNotes() {
+            const notes = JSON.parse(localStorage.getItem('systemdesign_notes') || '[]');
+            
+            if (notes.length === 0) {
+                alert('No notes to clear!');
+                return;
+            }
+            
+            if (!confirm(`Are you sure you want to delete all ${notes.length} notes? This cannot be undone!\n\nTip: Download your notes first to keep a backup.`)) {
+                return;
+            }
+            
+            localStorage.setItem('systemdesign_notes', '[]');
+            displayNotes();
+            alert('All notes have been cleared.');
+        }
+
+        // Initialize
+        window.addEventListener('load', () => {
+            loadProgress();
+            displayNotes();
+        });
+
+        // Auto-save every 3 seconds
         setInterval(saveProgress, 3000);
     </script>
 </body>
