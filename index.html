@@ -987,17 +987,80 @@ function updateAllStats() {
   });
 }
 
+// ── NOTES FEATURE ──────────────────────────────────────────
+// Define showAllNotes function early and expose it globally
+window.showAllNotes = function() {
+  console.log('[DEBUG] showAllNotes called');
+  currentTopic = 'notes';
+  searchQuery = '';
+  document.getElementById('search-input').value = '';
+  setActiveNav('nav-notes');
+  closeMobileSidebar();
+  
+  let notes = [];
+  for (let i = 0; i < localStorage.length; ++i) {
+    const k = localStorage.key(i);
+    if (k.startsWith('note|')) {
+      const [_, topic, num] = k.split('|');
+      const q = (DSA_DATA[topic]||[]).find(q=>String(q.num)===num);
+      if (q) notes.push({topic, num, text: q.text, note: localStorage.getItem(k)});
+    }
+  }
+  console.log('[DEBUG] Found notes:', notes.length);
+  notes.sort((a,b)=>a.topic.localeCompare(b.topic)||a.num-b.num);
+  const rows = notes.length === 0
+    ? '<div class="empty-qs"><h4>No notes added yet</h4></div>'
+    : notes.map(n => `
+      <div class="q-row" style="grid-template-columns: 1fr 3fr;">
+        <div style="font-weight:600;color:var(--accent2);padding:8px 0 8px 8px;">${n.topic} #${n.num}</div>
+        <div style="padding:8px 0 8px 8px;position:relative;">
+          <div style="font-size:13.5px;font-weight:500;margin-bottom:4px;">${n.text}</div>
+          <div style="background:var(--surface);border-radius:6px;padding:8px 10px 8px 10px;color:var(--muted2);font-size:13px;white-space:pre-wrap;">${n.note}</div>
+          <button class="sh-btn danger" style="position:absolute;top:8px;right:8px;font-size:11px;padding:3px 8px;" onclick="deleteNote('${n.topic}','${n.num}')">🗑 Delete</button>
+        </div>
+      </div>
+    `).join('');
+  console.log('[DEBUG] Setting content-area...');
+  document.getElementById('content-area').innerHTML = `
+    <div class="section-header">
+      <div class="sh-icon" style="background:#60a5fa20">🗒️</div>
+      <div class="sh-meta">
+        <div class="sh-title">All Notes</div>
+        <div class="sh-desc">View, download, or import all your notes</div>
+        <div class="sh-actions">
+          <button class="sh-btn" onclick="downloadNotes()">⬇ Download Notes</button>
+          <button class="sh-btn" onclick="importNotes()">⬆ Import Notes</button>
+        </div>
+      </div>
+    </div>
+    <div class="q-table">${rows}</div>
+  `;
+  console.log('[DEBUG] showAllNotes complete');
+};
+
 // ── SIDEBAR ───────────────────────────────────────────────
 // Add Notes tab to sidebar
 function addNotesTab() {
+  console.log('[DEBUG] addNotesTab called');
   const sidebar = document.getElementById('sidebar-nav');
+  console.log('[DEBUG] sidebar element:', sidebar);
   if (!document.getElementById('nav-notes')) {
     const notesTab = document.createElement('div');
     notesTab.className = 'nav-item';
     notesTab.id = 'nav-notes';
     notesTab.innerHTML = '<span class="nav-icon">🗒️</span><span class="nav-label">Notes</span>';
-    notesTab.setAttribute('onclick', 'showAllNotes()');
+    notesTab.addEventListener('click', function() {
+      console.log('[DEBUG] Notes tab clicked');
+      if (typeof window.showAllNotes === 'function') {
+        window.showAllNotes();
+      } else {
+        console.error('[DEBUG] showAllNotes not found in window');
+      }
+    });
     sidebar.appendChild(notesTab);
+    console.log('[DEBUG] Notes tab appended to sidebar');
+  } else {
+    console.log('[DEBUG] nav-notes already exists');
   }
 }
 
@@ -1170,47 +1233,6 @@ function renderTopicView() {
           </div>
         </div>`;
       }).join('');
-// ── NOTES FEATURE ──────────────────────────────────────────
-
-function showAllNotes() {
-  setActiveNav('nav-notes');
-  let notes = [];
-  for (let i = 0; i < localStorage.length; ++i) {
-    const k = localStorage.key(i);
-    if (k.startsWith('note|')) {
-      const [_, topic, num] = k.split('|');
-      const q = (DSA_DATA[topic]||[]).find(q=>String(q.num)===num);
-      if (q) notes.push({topic, num, text: q.text, note: localStorage.getItem(k)});
-    }
-  }
-  notes.sort((a,b)=>a.topic.localeCompare(b.topic)||a.num-b.num);
-  const rows = notes.length === 0
-    ? '<div class="empty-qs"><h4>No notes added yet</h4></div>'
-    : notes.map(n => `
-      <div class="q-row" style="grid-template-columns: 1fr 3fr;">
-        <div style="font-weight:600;color:var(--accent2);padding:8px 0 8px 8px;">${n.topic} #${n.num}</div>
-        <div style="padding:8px 0 8px 8px;position:relative;">
-          <div style="font-size:13.5px;font-weight:500;margin-bottom:4px;">${n.text}</div>
-          <div style="background:var(--surface);border-radius:6px;padding:8px 10px 8px 10px;color:var(--muted2);font-size:13px;white-space:pre-wrap;">${n.note}</div>
-          <button class="sh-btn danger" style="position:absolute;top:8px;right:8px;font-size:11px;padding:3px 8px;" onclick="deleteNote('${n.topic}','${n.num}')">🗑 Delete</button>
-        </div>
-      </div>
-    `).join('');
-  document.getElementById('content-area').innerHTML = `
-    <div class="section-header">
-      <div class="sh-icon" style="background:#60a5fa20">🗒️</div>
-      <div class="sh-meta">
-        <div class="sh-title">All Notes</div>
-        <div class="sh-desc">View, download, or import all your notes</div>
-        <div class="sh-actions">
-          <button class="sh-btn" onclick="downloadNotes()">⬇ Download Notes</button>
-          <button class="sh-btn" onclick="importNotes()">⬆ Import Notes</button>
-        </div>
-      </div>
-    </div>
-    <div class="q-table">${rows}</div>
-  `;
-}
 
 function downloadNotes() {
   let notes = [];
