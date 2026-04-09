@@ -553,6 +553,66 @@
             color: var(--accent-secondary);
         }
 
+        .track-tabs {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 40px;
+            border-bottom: 2px solid var(--border);
+            flex-wrap: wrap;
+        }
+
+        .track-tab {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.1rem;
+            font-weight: 600;
+            padding: 15px 30px;
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+            margin-bottom: -2px;
+        }
+
+        .track-tab:hover {
+            color: var(--text-primary);
+        }
+
+        .track-tab.active {
+            color: var(--accent-primary);
+            border-bottom-color: var(--accent-primary);
+        }
+
+        .track-content {
+            display: none;
+        }
+
+        .track-content.active {
+            display: block;
+        }
+
+        .track-badge {
+            display: inline-block;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            padding: 4px 10px;
+            background: var(--bg-tertiary);
+            border-radius: 12px;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        .track-badge.hld {
+            color: var(--accent-primary);
+            border: 1px solid var(--accent-primary);
+        }
+
+        .track-badge.lld {
+            color: var(--accent-secondary);
+            border: 1px solid var(--accent-secondary);
+        }
+
         @media (max-width: 768px) {
             .container { padding: 40px 20px; }
             h1 { font-size: 2.5rem; }
@@ -561,6 +621,8 @@
             .stats-grid { grid-template-columns: 1fr; }
             .header-meta { flex-direction: column; gap: 15px; }
             table { display: block; overflow-x: auto; }
+            .track-tabs { flex-direction: column; gap: 10px; }
+            .track-tab { padding: 12px 20px; }
         }
     </style>
 </head>
@@ -589,19 +651,19 @@
 
         <div class="stats-grid">
             <div class="stat-card">
-                <div class="stat-label">Total Topics</div>
-                <div class="stat-value">85</div>
-                <div class="stat-subtitle">HLD + LLD Combined</div>
+                <div class="stat-label">HLD Topics</div>
+                <div class="stat-value" id="hldTotal">0/45</div>
+                <div class="stat-subtitle">High-Level Design</div>
             </div>
             <div class="stat-card">
-                <div class="stat-label">Completed</div>
-                <div class="stat-value" id="completedTopics">0</div>
+                <div class="stat-label">LLD Topics</div>
+                <div class="stat-value" id="lldTotal">0/40</div>
+                <div class="stat-subtitle">Low-Level Design</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Overall Completed</div>
+                <div class="stat-value" id="completedTopics">0/85</div>
                 <div class="stat-subtitle">Keep Going!</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-label">In Progress</div>
-                <div class="stat-value" id="inProgressTopics">0</div>
-                <div class="stat-subtitle">Active Learning</div>
             </div>
             <div class="stat-card">
                 <div class="stat-label">Practice Problems</div>
@@ -610,22 +672,35 @@
             </div>
         </div>
 
-        <!-- Phase 1 -->
+        <!-- Learning Tracks -->
         <section class="section">
             <div class="section-header">
                 <div class="section-number">01</div>
-                <h2 class="section-title">Learning Phases</h2>
+                <h2 class="section-title">Learning Tracks</h2>
             </div>
 
-            <div class="phase-card">
-                <div class="phase-header">
-                    <div class="phase-badge">Phase 01</div>
-                    <h3 class="phase-title">Foundation Building</h3>
-                    <div class="phase-duration">Weeks 1-3 • Beginner Level</div>
-                </div>
-                <div class="phase-content">
-                    <div class="topic-section">
-                        <div class="topic-header">High-Level Design (HLD)</div>
+            <div class="track-tabs">
+                <button class="track-tab active" onclick="switchTrack('hld')">
+                    High-Level Design (HLD)
+                    <span class="track-badge hld">45 Topics</span>
+                </button>
+                <button class="track-tab" onclick="switchTrack('lld')">
+                    Low-Level Design (LLD)
+                    <span class="track-badge lld">40 Topics</span>
+                </button>
+            </div>
+
+            <!-- HLD Track -->
+            <div id="hld-track" class="track-content active">
+
+                <div class="phase-card">
+                    <div class="phase-header">
+                        <div class="phase-badge">HLD Phase 01</div>
+                        <h3 class="phase-title">HLD Foundations</h3>
+                        <div class="phase-duration">Weeks 1-3 • System Design Basics</div>
+                    </div>
+                    <div class="phase-content">
+                        <div class="topic-section">
                         <div class="topic-item" onclick="toggleCheck(this)">
                             <div class="checkbox"></div>
                             <div class="topic-content">
@@ -661,51 +736,19 @@
                                 <div class="topic-meta">Week 3 • Best practices</div>
                             </div>
                         </div>
-                    </div>
-                    <div class="topic-section">
-                        <div class="topic-header">Low-Level Design (LLD)</div>
-                        <div class="topic-item" onclick="toggleCheck(this)">
-                            <div class="checkbox"></div>
-                            <div class="topic-content">
-                                <div class="topic-name">SOLID Principles</div>
-                                <div class="topic-meta">Week 1 • OOP foundation</div>
-                            </div>
-                        </div>
-                        <div class="topic-item" onclick="toggleCheck(this)">
-                            <div class="checkbox"></div>
-                            <div class="topic-content">
-                                <div class="topic-name">Creational Patterns</div>
-                                <div class="topic-meta">Week 2 • Singleton, Factory, Builder</div>
-                            </div>
-                        </div>
-                        <div class="topic-item" onclick="toggleCheck(this)">
-                            <div class="checkbox"></div>
-                            <div class="topic-content">
-                                <div class="topic-name">Structural Patterns</div>
-                                <div class="topic-meta">Week 3 • Adapter, Decorator, Proxy</div>
-                            </div>
-                        </div>
-                        <div class="topic-item" onclick="toggleCheck(this)">
-                            <div class="checkbox"></div>
-                            <div class="topic-content">
-                                <div class="topic-name">UML & Class Design</div>
-                                <div class="topic-meta">Week 3 • Diagrams</div>
-                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Phase 2 -->
-            <div class="phase-card">
-                <div class="phase-header">
-                    <div class="phase-badge">Phase 02</div>
-                    <h3 class="phase-title">Intermediate Concepts</h3>
-                    <div class="phase-duration">Weeks 4-7 • Intermediate Level</div>
-                </div>
-                <div class="phase-content">
-                    <div class="topic-section">
-                        <div class="topic-header">High-Level Design (HLD)</div>
+                <!-- HLD Phase 2 -->
+                <div class="phase-card">
+                    <div class="phase-header">
+                        <div class="phase-badge">HLD Phase 02</div>
+                        <h3 class="phase-title">HLD Intermediate</h3>
+                        <div class="phase-duration">Weeks 4-7 • Distributed Systems</div>
+                    </div>
+                    <div class="phase-content">
+                        <div class="topic-section">
                         <div class="topic-item" onclick="toggleCheck(this)">
                             <div class="checkbox"></div>
                             <div class="topic-content">
@@ -755,51 +798,19 @@
                                 <div class="topic-meta">Week 7 • Live systems</div>
                             </div>
                         </div>
-                    </div>
-                    <div class="topic-section">
-                        <div class="topic-header">Low-Level Design (LLD)</div>
-                        <div class="topic-item" onclick="toggleCheck(this)">
-                            <div class="checkbox"></div>
-                            <div class="topic-content">
-                                <div class="topic-name">Behavioral Patterns</div>
-                                <div class="topic-meta">Week 4-5 • Observer, Strategy, Command</div>
-                            </div>
-                        </div>
-                        <div class="topic-item" onclick="toggleCheck(this)">
-                            <div class="checkbox"></div>
-                            <div class="topic-content">
-                                <div class="topic-name">Concurrency Patterns</div>
-                                <div class="topic-meta">Week 5-6 • Thread safety</div>
-                            </div>
-                        </div>
-                        <div class="topic-item" onclick="toggleCheck(this)">
-                            <div class="checkbox"></div>
-                            <div class="topic-content">
-                                <div class="topic-name">State Machines</div>
-                                <div class="topic-meta">Week 6 • FSM design</div>
-                            </div>
-                        </div>
-                        <div class="topic-item" onclick="toggleCheck(this)">
-                            <div class="checkbox"></div>
-                            <div class="topic-content">
-                                <div class="topic-name">Clean Architecture</div>
-                                <div class="topic-meta">Week 7 • Hexagonal, Onion</div>
-                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Phase 3 -->
-            <div class="phase-card">
-                <div class="phase-header">
-                    <div class="phase-badge">Phase 03</div>
-                    <h3 class="phase-title">Advanced Architecture</h3>
-                    <div class="phase-duration">Weeks 8-10 • Advanced Level</div>
-                </div>
-                <div class="phase-content">
-                    <div class="topic-section">
-                        <div class="topic-header">High-Level Design (HLD)</div>
+                <!-- HLD Phase 3 -->
+                <div class="phase-card">
+                    <div class="phase-header">
+                        <div class="phase-badge">HLD Phase 03</div>
+                        <h3 class="phase-title">HLD Advanced</h3>
+                        <div class="phase-duration">Weeks 8-10 • Advanced Architecture</div>
+                    </div>
+                    <div class="phase-content">
+                        <div class="topic-section">
                         <div class="topic-item" onclick="toggleCheck(this)">
                             <div class="checkbox"></div>
                             <div class="topic-content">
@@ -842,51 +853,19 @@
                                 <div class="topic-meta">Week 10 • Metrics, logs, traces</div>
                             </div>
                         </div>
-                    </div>
-                    <div class="topic-section">
-                        <div class="topic-header">Low-Level Design (LLD)</div>
-                        <div class="topic-item" onclick="toggleCheck(this)">
-                            <div class="checkbox"></div>
-                            <div class="topic-content">
-                                <div class="topic-name">Lock-free Concurrency</div>
-                                <div class="topic-meta">Week 8 • CAS operations</div>
-                            </div>
-                        </div>
-                        <div class="topic-item" onclick="toggleCheck(this)">
-                            <div class="checkbox"></div>
-                            <div class="topic-content">
-                                <div class="topic-name">Memory Management</div>
-                                <div class="topic-meta">Week 9 • Optimization</div>
-                            </div>
-                        </div>
-                        <div class="topic-item" onclick="toggleCheck(this)">
-                            <div class="checkbox"></div>
-                            <div class="topic-content">
-                                <div class="topic-name">Domain-Driven Design</div>
-                                <div class="topic-meta">Week 9-10 • DDD patterns</div>
-                            </div>
-                        </div>
-                        <div class="topic-item" onclick="toggleCheck(this)">
-                            <div class="checkbox"></div>
-                            <div class="topic-content">
-                                <div class="topic-name">Event Sourcing & CQRS</div>
-                                <div class="topic-meta">Week 10 • Event stores</div>
-                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Phase 4 -->
-            <div class="phase-card">
-                <div class="phase-header">
-                    <div class="phase-badge">Phase 04</div>
-                    <h3 class="phase-title">Expert Mastery</h3>
-                    <div class="phase-duration">Weeks 11-12 • Expert Level</div>
-                </div>
-                <div class="phase-content">
-                    <div class="topic-section">
-                        <div class="topic-header">High-Level Design (HLD)</div>
+                <!-- HLD Phase 4 -->
+                <div class="phase-card">
+                    <div class="phase-header">
+                        <div class="phase-badge">HLD Phase 04</div>
+                        <h3 class="phase-title">HLD Expert</h3>
+                        <div class="phase-duration">Weeks 11-12 • Production Systems</div>
+                    </div>
+                    <div class="phase-content">
+                        <div class="topic-section">
                         <div class="topic-item" onclick="toggleCheck(this)">
                             <div class="checkbox"></div>
                             <div class="topic-content">
@@ -915,9 +894,145 @@
                                 <div class="topic-meta">Week 12 • Decision making</div>
                             </div>
                         </div>
+                        </div>
                     </div>
-                    <div class="topic-section">
-                        <div class="topic-header">Interview Prep</div>
+                </div>
+            </div>
+
+            <!-- LLD Track -->
+            <div id="lld-track" class="track-content">
+                <!-- LLD Phase 1 -->
+                <div class="phase-card">
+                    <div class="phase-header">
+                        <div class="phase-badge">LLD Phase 01</div>
+                        <h3 class="phase-title">LLD Foundations</h3>
+                        <div class="phase-duration">Weeks 1-3 • OOP & Patterns</div>
+                    </div>
+                    <div class="phase-content">
+                        <div class="topic-section">
+                        <div class="topic-item" onclick="toggleCheck(this)">
+                            <div class="checkbox"></div>
+                            <div class="topic-content">
+                                <div class="topic-name">SOLID Principles</div>
+                                <div class="topic-meta">Week 1 • OOP foundation</div>
+                            </div>
+                        </div>
+                        <div class="topic-item" onclick="toggleCheck(this)">
+                            <div class="checkbox"></div>
+                            <div class="topic-content">
+                                <div class="topic-name">Creational Patterns</div>
+                                <div class="topic-meta">Week 2 • Singleton, Factory, Builder</div>
+                            </div>
+                        </div>
+                        <div class="topic-item" onclick="toggleCheck(this)">
+                            <div class="checkbox"></div>
+                            <div class="topic-content">
+                                <div class="topic-name">Structural Patterns</div>
+                                <div class="topic-meta">Week 3 • Adapter, Decorator, Proxy</div>
+                            </div>
+                        </div>
+                        <div class="topic-item" onclick="toggleCheck(this)">
+                            <div class="checkbox"></div>
+                            <div class="topic-content">
+                                <div class="topic-name">UML & Class Design</div>
+                                <div class="topic-meta">Week 3 • Diagrams</div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LLD Phase 2 -->
+                <div class="phase-card">
+                    <div class="phase-header">
+                        <div class="phase-badge">LLD Phase 02</div>
+                        <h3 class="phase-title">LLD Intermediate</h3>
+                        <div class="phase-duration">Weeks 4-7 • Advanced Patterns</div>
+                    </div>
+                    <div class="phase-content">
+                        <div class="topic-section">
+                        <div class="topic-item" onclick="toggleCheck(this)">
+                            <div class="checkbox"></div>
+                            <div class="topic-content">
+                                <div class="topic-name">Behavioral Patterns</div>
+                                <div class="topic-meta">Week 4-5 • Observer, Strategy, Command</div>
+                            </div>
+                        </div>
+                        <div class="topic-item" onclick="toggleCheck(this)">
+                            <div class="checkbox"></div>
+                            <div class="topic-content">
+                                <div class="topic-name">Concurrency Patterns</div>
+                                <div class="topic-meta">Week 5-6 • Thread safety</div>
+                            </div>
+                        </div>
+                        <div class="topic-item" onclick="toggleCheck(this)">
+                            <div class="checkbox"></div>
+                            <div class="topic-content">
+                                <div class="topic-name">State Machines</div>
+                                <div class="topic-meta">Week 6 • FSM design</div>
+                            </div>
+                        </div>
+                        <div class="topic-item" onclick="toggleCheck(this)">
+                            <div class="checkbox"></div>
+                            <div class="topic-content">
+                                <div class="topic-name">Clean Architecture</div>
+                                <div class="topic-meta">Week 7 • Hexagonal, Onion</div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LLD Phase 3 -->
+                <div class="phase-card">
+                    <div class="phase-header">
+                        <div class="phase-badge">LLD Phase 03</div>
+                        <h3 class="phase-title">LLD Advanced</h3>
+                        <div class="phase-duration">Weeks 8-10 • Complex Systems</div>
+                    </div>
+                    <div class="phase-content">
+                        <div class="topic-section">
+                        <div class="topic-item" onclick="toggleCheck(this)">
+                            <div class="checkbox"></div>
+                            <div class="topic-content">
+                                <div class="topic-name">Lock-free Concurrency</div>
+                                <div class="topic-meta">Week 8 • CAS operations</div>
+                            </div>
+                        </div>
+                        <div class="topic-item" onclick="toggleCheck(this)">
+                            <div class="checkbox"></div>
+                            <div class="topic-content">
+                                <div class="topic-name">Memory Management</div>
+                                <div class="topic-meta">Week 9 • Optimization</div>
+                            </div>
+                        </div>
+                        <div class="topic-item" onclick="toggleCheck(this)">
+                            <div class="checkbox"></div>
+                            <div class="topic-content">
+                                <div class="topic-name">Domain-Driven Design</div>
+                                <div class="topic-meta">Week 9-10 • DDD patterns</div>
+                            </div>
+                        </div>
+                        <div class="topic-item" onclick="toggleCheck(this)">
+                            <div class="checkbox"></div>
+                            <div class="topic-content">
+                                <div class="topic-name">Event Sourcing & CQRS</div>
+                                <div class="topic-meta">Week 10 • Event stores</div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LLD Phase 4 -->
+                <div class="phase-card">
+                    <div class="phase-header">
+                        <div class="phase-badge">LLD Phase 04</div>
+                        <h3 class="phase-title">LLD Mastery & Interview Prep</h3>
+                        <div class="phase-duration">Weeks 11-12 • Practice & Polish</div>
+                    </div>
+                    <div class="phase-content">
+                        <div class="topic-section">
                         <div class="topic-item" onclick="toggleCheck(this)">
                             <div class="checkbox"></div>
                             <div class="topic-content">
@@ -931,6 +1046,7 @@
                                 <div class="topic-name">Communication Skills</div>
                                 <div class="topic-meta">Week 12 • Whiteboarding</div>
                             </div>
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -1388,6 +1504,16 @@
     </div>
 
     <script>
+        function switchTrack(track) {
+            // Update tabs
+            document.querySelectorAll('.track-tab').forEach(tab => tab.classList.remove('active'));
+            event.target.closest('.track-tab').classList.add('active');
+            
+            // Update content
+            document.querySelectorAll('.track-content').forEach(content => content.classList.remove('active'));
+            document.getElementById(track + '-track').classList.add('active');
+        }
+
         function toggleCheck(element) {
             const checkbox = element.querySelector('.checkbox');
             checkbox.classList.toggle('checked');
@@ -1400,6 +1526,12 @@
             const checkedBoxes = document.querySelectorAll('.checkbox.checked');
             const allSelects = document.querySelectorAll('.status-select');
             
+            // Count HLD and LLD separately
+            const hldCheckboxes = document.querySelectorAll('#hld-track .checkbox');
+            const lldCheckboxes = document.querySelectorAll('#lld-track .checkbox');
+            const hldChecked = document.querySelectorAll('#hld-track .checkbox.checked');
+            const lldChecked = document.querySelectorAll('#lld-track .checkbox.checked');
+            
             let doneCount = 0;
             let inProgressCount = 0;
             allSelects.forEach(select => {
@@ -1410,8 +1542,9 @@
             const totalTopics = 85;
             const completedTopics = checkedBoxes.length;
             
-            document.getElementById('completedTopics').textContent = completedTopics;
-            document.getElementById('inProgressTopics').textContent = inProgressCount;
+            document.getElementById('hldTotal').textContent = hldChecked.length + '/' + hldCheckboxes.length;
+            document.getElementById('lldTotal').textContent = lldChecked.length + '/' + lldCheckboxes.length;
+            document.getElementById('completedTopics').textContent = completedTopics + '/' + totalTopics;
             
             const progressPercentage = Math.round((completedTopics / totalTopics) * 100);
             document.getElementById('overallProgress').textContent = progressPercentage + '%';
